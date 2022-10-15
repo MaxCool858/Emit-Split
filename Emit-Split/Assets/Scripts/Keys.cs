@@ -15,6 +15,16 @@ public class Keys : MonoBehaviour
     public GameObject Door_Blue;
 
 
+
+
+    /*
+    *checks for colored keys and doors
+    *adds keys to list 
+    *checks if door has right key color
+    *if not then door stays closed
+    *if yes then the door destroys
+    *this can be replaced with an animation later to look smoother
+    */  
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Key_Blue")
@@ -44,35 +54,35 @@ public class Keys : MonoBehaviour
         {
            if(keyList.Contains (Key_Blue))
             {
-                Door_Blue = GameObject.Find("Door_Blue");
-                Destroy(Door_Blue);
-                Debug.Log("Door is open");
+                Destroy(GameObject.FindWithTag("Door_Blue"));
             }
            else
             {
                 Debug.Log("Door is closed");
             }
         }
-
-    
-
-    }
-
-    private void CheckIfKey()
-    {
-        //if(keyList)
-
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        if (other.tag == "Door_Green")
+        {
+            if (keyList.Contains(Key_Green))
+            {
+                Destroy(GameObject.FindWithTag("Door_Green"));
+            }
+            else
+            {
+                Debug.Log("Door is closed");
+             }
+        }
+        if (other.tag == "Door_Red")
+        {
+            if (keyList.Contains(Key_Red))
+            {
+                Destroy(GameObject.FindWithTag("Door_Red"));
+            }
+            else
+            {
+                Debug.Log("Door is closed");
+             }
+        }
 
 
 
