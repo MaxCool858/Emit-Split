@@ -8,6 +8,12 @@ public class Keys : MonoBehaviour
 
     public GameObject Key_Blue;
 
+    public GameObject Key_Green;
+
+    public GameObject Key_Red;
+
+    public GameObject Door_Blue;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,7 +22,21 @@ public class Keys : MonoBehaviour
             Key_Blue = GameObject.Find("Key_Blue");
             keyList.Add(Key_Blue);
             
-            Debug.Log(keyList);
+        }
+
+
+        if (other.tag == "Key_Green")
+        {
+            Key_Blue = GameObject.Find("Key_Green");
+            keyList.Add(Key_Green);
+
+        }
+
+        if (other.tag == "Key_Red")
+        {
+            Key_Blue = GameObject.Find("Key_Red");
+            keyList.Add(Key_Red);
+
         }
 
 
@@ -24,7 +44,8 @@ public class Keys : MonoBehaviour
         {
            if(keyList.Contains (Key_Blue))
             {
-                
+                Door_Blue = GameObject.Find("Door_Blue");
+                Destroy(Door_Blue);
                 Debug.Log("Door is open");
             }
            else
