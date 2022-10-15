@@ -6,8 +6,8 @@ TagManager:
   tags:
   - hidden
   - vent
-  - charge
   - light
+  - charger
   layers:
   - Default
   - TransparentFX

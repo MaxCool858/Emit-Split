@@ -1966,12 +1966,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1105388239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c7f7d2086c71424da7898161114fd25, type: 3}
+  m_Script: {fileID: 11500000, guid: 21b1337ca0f688c4b805413168fc39b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ventDetected: 0
-  potionDetected: 0
-  portalDetected: 0
+  lightOn: 0
+  lightSource: {fileID: 657417812}
 --- !u!1 &1216620635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,7 +2175,7 @@ GameObject:
   - component: {fileID: 1388085438}
   m_Layer: 0
   m_Name: Charging pad
-  m_TagString: charge
+  m_TagString: charger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
