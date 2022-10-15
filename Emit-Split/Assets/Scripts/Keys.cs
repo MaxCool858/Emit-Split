@@ -37,14 +37,14 @@ public class Keys : MonoBehaviour
 
         if (other.tag == "Key_Green")
         {
-            Key_Blue = GameObject.Find("Key_Green");
+            Key_Green = GameObject.Find("Key_Green");
             keyList.Add(Key_Green);
 
         }
 
         if (other.tag == "Key_Red")
         {
-            Key_Blue = GameObject.Find("Key_Red");
+            Key_Red = GameObject.Find("Key_Red");
             keyList.Add(Key_Red);
 
         }
@@ -61,6 +61,7 @@ public class Keys : MonoBehaviour
                 Debug.Log("Door is closed");
             }
         }
+
         if (other.tag == "Door_Green")
         {
             if (keyList.Contains(Key_Green))
@@ -72,6 +73,7 @@ public class Keys : MonoBehaviour
                 Debug.Log("Door is closed");
              }
         }
+
         if (other.tag == "Door_Red")
         {
             if (keyList.Contains(Key_Red))

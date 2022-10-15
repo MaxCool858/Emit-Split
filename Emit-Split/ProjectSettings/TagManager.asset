@@ -9,6 +9,10 @@ TagManager:
   - Hurty
   - Key_Blue
   - Door_Blue
+  - Key_Green
+  - Key_Red
+  - Door_Green
+  - Door_Red
   layers:
   - Default
   - TransparentFX
