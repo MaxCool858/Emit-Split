@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Fist
+  - Hurty
+  - Key_Blue
+  - Door_Blue
   layers:
   - Default
   - TransparentFX
