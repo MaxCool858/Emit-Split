@@ -5,22 +5,47 @@ using UnityEngine.InputSystem;
 
 public class LightbotMovement : MonoBehaviour
 {
-    public GameObject spotlight;
-    private Rigidbody LightbotRb;
-    private void Awake()
-    {
-        spotlight.SetActive(false);
-    }
+    public GameObject spotlight;     
+    public float speed = 10f;
+    Vector2 botVector;
+    private bool spotlightOn;
+
     private void Update()
     {
+        transform.Translate(botVector.x * speed * Time.deltaTime, 0, botVector.y * speed * Time.deltaTime);
 
+        if (spotlightOn)
+        {
+            spotlight.SetActive(true);
+        }
+        else
+        {
+            spotlight.SetActive(false);
+        }
     }
+
     public void Movement(InputAction.CallbackContext context)
     {
-        float speed = 100f;
+  
 
         Debug.Log(context);
-        Vector2 playerVector = context.ReadValue<Vector2>();
-        LightbotRb.AddForce(new Vector3(playerVector.x, 0, playerVector.y) * speed, ForceMode.Force);
+        botVector = context.ReadValue<Vector2>();
+        
+    }
+    public void SpotOn(InputAction.CallbackContext context)
+    {
+        Debug.Log(context);
+
+        if (context.performed)
+        {
+            if (spotlightOn)
+            {
+                spotlightOn = false;
+            }
+            else
+            {
+                spotlightOn = true;
+            }
+        }
     }
 }

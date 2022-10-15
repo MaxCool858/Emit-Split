@@ -4,20 +4,40 @@ using UnityEngine;
 
 public class HiddenObjects : MonoBehaviour
 {
-    public Renderer rend;
-    // Start is called before the first frame update
-    void Start()
+    public GameObject lightSource;
+    public GameObject hiddenObject;
+    private bool objectHidden;
+    private void Awake()
     {
-        rend = GetComponent<Renderer>();
-        rend.enabled = false;
+        objectHidden = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (GetComponent<SpotlightDetect>().ventDetected)
+        if (objectHidden)
         {
-            rend.enabled = true;
+            hiddenObject.SetActive(false);
+        }
+        else
+        {
+            hiddenObject.SetActive(true);
+        }
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "light")
+        {
+            objectHidden = false;
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "light")
+        {
+            objectHidden = true;
+        }
+    }
+
 }
