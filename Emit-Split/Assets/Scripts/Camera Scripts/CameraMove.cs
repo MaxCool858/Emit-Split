@@ -9,7 +9,6 @@ public class CameraMove : MonoBehaviour
     public float pLerp = .02f;
     public float rLerp = .01f;
 
-
     //moves camera to position
     void Update()
     {

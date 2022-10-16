@@ -7,7 +7,7 @@ public class UIManagement : MonoBehaviour
 {
 
     GameObject player;
-    int Health = 10;
+    public int Health = 10;
     public float Energy = 100;
     public Text healthtext;
     GameObject EnergyBar;
@@ -30,6 +30,25 @@ public class UIManagement : MonoBehaviour
             healthtext.text = "Health: " + Health.ToString();
             HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
         }
+
+
+        if (other.tag == "Enemy_3")
+        {
+            Health = Health - 1;
+           // healthtext.text = "Health: " + Health.ToString();
+            //HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
+            Debug.Log("health countt - "+Health);
+        }
+
+        if (other.tag == "Bullet")
+        {
+            Health = Health - 1;
+          //  healthtext.text = "Health: " + Health.ToString();
+          //  HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
+        }
+
+
+
     }
 
     public void LoseEnergy(int energysubtract)

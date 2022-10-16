@@ -13,6 +13,9 @@ TagManager:
   - Key_Red
   - Door_Green
   - Door_Red
+  - Enemy_3
+  - CamTarget
+  - Bullet
   layers:
   - Default
   - TransparentFX

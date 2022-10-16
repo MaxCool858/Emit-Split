@@ -30,7 +30,7 @@ public class Movee : MonoBehaviour
         playerInput.CharacterMove.Move.started += onMoveInput;
         playerInput.CharacterMove.Move.canceled += onMoveInput;
         playerInput.CharacterMove.Move.performed += onMoveInput;
-        player = GameObject.Find("Playber");
+        player = GameObject.Find("Player");
         shootpoint = GameObject.Find("shootpoint").transform;
         //Fist = GameObject.Find("Fist");
     }
