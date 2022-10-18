@@ -16,7 +16,7 @@ public class UIManagement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Playber");
+        player = GameObject.Find("Player");
         EnergyBar = GameObject.Find("EnergyBar");
         HealthBar = GameObject.Find("HealthBar");
         

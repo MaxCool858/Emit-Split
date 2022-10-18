@@ -12,9 +12,16 @@ public class CameraRayCast : MonoBehaviour
 
     public Image TargetLocked;
 
+    public Image TargetSearch;
+
+    public GameObject Player;
+    
+
     void Awake()
     {
+        TargetSearch.enabled = true;
         TargetLocked.enabled = false;
+     
     }
 
     void Start()
@@ -27,8 +34,13 @@ public class CameraRayCast : MonoBehaviour
     void Update()
     {
         Raycast();
-            
-        Debug.DrawRay(transform.position, transform.forward *50,Color.green);
+        /*
+        if (playerInput.CharacterMove.FireWeapon.triggered && player.GetComponent<UIManagement>().Energy >= 10)
+        {
+            FireWeapon();
+        }
+        */
+        Debug.DrawRay(transform.position, transform.forward *100,Color.green);
 
     }
 
@@ -40,31 +52,40 @@ public class CameraRayCast : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(transform.position, transform.forward,out hit,50f))
+        if (Physics.Raycast(transform.position, transform.forward,out hit,100f))
         {
-            //if enemy by tag
-            if (hit.transform.tag == "Enemy")
+            //if raycast hits enemy tags, then crosshair goes red . meaning its ready to become possessable 
+            if (hit.transform.tag == "Enemy" || hit.transform.tag == "Enemy_3" )
             {
                 //
                 TargetLocked.enabled = true;
+                TargetSearch.enabled = false;
                 EnemyTargeted = hit.transform.gameObject;
 
-                Debug.Log("Trget" + EnemyTargeted);
 
-             Debug.Log("Hit Enemy");
+                Player.GetComponent<UIManagement>().enabled = false;
+                Player.GetComponent<Movee>().enabled = false;
 
             }
-            
-            
+
+
         }
+
+        //if no enemy present, then make crosshair back to white and clear raycast hit
         else
         {
             TargetLocked.enabled = false;
-            Debug.Log("Hitting nothing");
+            TargetSearch.enabled = true;
+
             EnemyTargeted = null;
+
+
+            Player.GetComponent<UIManagement>().enabled = true;
+            Player.GetComponent<Movee>().enabled = true;
+
         }
 
     }
 
-
+   
 }

@@ -34,7 +34,7 @@ public class Movee : MonoBehaviour
         shootpoint = GameObject.Find("shootpoint").transform;
         //Fist = GameObject.Find("Fist");
     }
-
+    
     void FireWeapon()
     {
         player.GetComponent<UIManagement>().LoseEnergy(10);
@@ -48,7 +48,7 @@ public class Movee : MonoBehaviour
         yield return new WaitForSeconds(1);
         Fist.SetActive(false);
     }
-
+    
     void FireSplitter()
     {
         player.GetComponent<UIManagement>().LoseEnergy(0);
@@ -106,14 +106,18 @@ public class Movee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (playerInput.CharacterMove.FireWeapon.triggered && player.GetComponent<UIManagement>().Energy >= 10)
         {
             FireWeapon();
         }
+
+        /*
         if (playerInput.CharacterMove.FireSplitter.triggered && player.GetComponent<UIManagement>().Energy >= 50)
         {
             FireSplitter();
         }
+        */
         playercontrol.Move(CurrentMovement*Time.deltaTime*speed);
         RotatePlayer();
         

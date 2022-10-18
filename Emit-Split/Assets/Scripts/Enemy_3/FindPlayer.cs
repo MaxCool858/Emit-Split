@@ -20,7 +20,7 @@ public class FindPlayer : MonoBehaviour
 
             LookAtPlayer();
 
-            StartCoroutine(ShootAtPlayer());
+          //  StartCoroutine(ShootAtPlayer());
 
         }
 
@@ -43,11 +43,11 @@ public class FindPlayer : MonoBehaviour
     }
 
  
-
+/*
     private IEnumerator ShootAtPlayer()
     {
         Instantiate(Bullet);
     }
-
+*/
 }
 
