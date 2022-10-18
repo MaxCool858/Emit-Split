@@ -12,6 +12,13 @@ public class FindPlayer : MonoBehaviour
 
     public GameObject Bullet;
 
+    float ForceAmount = 10.0f;// or any value you want
+
+    private float speedofBullet = 5f;
+
+
+    public bool isShooting = false;
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -20,7 +27,12 @@ public class FindPlayer : MonoBehaviour
 
             LookAtPlayer();
 
-          //  StartCoroutine(ShootAtPlayer());
+            ShootAtPlayer();
+
+            if(isShooting)
+            {
+                Shoot();
+            }
 
         }
 
@@ -42,12 +54,28 @@ public class FindPlayer : MonoBehaviour
 
     }
 
- 
-/*
-    private IEnumerator ShootAtPlayer()
+
+    
+    private void ShootAtPlayer()
     {
-        Instantiate(Bullet);
+
+
+        Instantiate(Bullet, GetComponent<Transform>().position, GetComponent<Transform>().rotation);
+
+        isShooting = true;
+
     }
-*/
+
+
+    IEnumerator Shoot()
+
+    {
+        Vector3 BullPos = Bullet.transform.position;
+        BullPos.z += Bullet.transform.position.z * speedofBullet * Time.deltaTime;
+        transform.position = BullPos;
+        yield return null;
+    }
+
+
 }
 

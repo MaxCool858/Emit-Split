@@ -62,10 +62,11 @@ public class CameraRayCast : MonoBehaviour
                 TargetSearch.enabled = false;
                 EnemyTargeted = hit.transform.gameObject;
 
-
+                //enable wehn fixing
+                /*
                 Player.GetComponent<UIManagement>().enabled = false;
                 Player.GetComponent<Movee>().enabled = false;
-
+                */
             }
 
 
@@ -79,10 +80,11 @@ public class CameraRayCast : MonoBehaviour
 
             EnemyTargeted = null;
 
-
+            //enable these two when fixing 
+            /*
             Player.GetComponent<UIManagement>().enabled = true;
             Player.GetComponent<Movee>().enabled = true;
-
+            */
         }
 
     }
