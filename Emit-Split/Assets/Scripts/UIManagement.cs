@@ -7,7 +7,7 @@ public class UIManagement : MonoBehaviour
 {
 
     GameObject player;
-    public int Health = 10;
+    int Health = 10;
     public float Energy = 100;
     public Text healthtext;
     GameObject EnergyBar;
@@ -16,7 +16,7 @@ public class UIManagement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Playber");
         EnergyBar = GameObject.Find("EnergyBar");
         HealthBar = GameObject.Find("HealthBar");
         
@@ -30,25 +30,6 @@ public class UIManagement : MonoBehaviour
             healthtext.text = "Health: " + Health.ToString();
             HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
         }
-
-
-        if (other.tag == "Enemy_3")
-        {
-            Health = Health - 1;
-           // healthtext.text = "Health: " + Health.ToString();
-            //HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
-            Debug.Log("health countt - "+Health);
-        }
-
-        if (other.tag == "Bullet")
-        {
-            Health = Health - 1;
-          //  healthtext.text = "Health: " + Health.ToString();
-          //  HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
-        }
-
-
-
     }
 
     public void LoseEnergy(int energysubtract)
@@ -64,7 +45,7 @@ public class UIManagement : MonoBehaviour
         EnergyBar.GetComponent<Scrollbar>().size = Energy * 0.01f;
         if (Energy < 100)
         {
-            Energy = Energy + 0.1f;
+            Energy = Energy + 0.2f;
         }
         
     }

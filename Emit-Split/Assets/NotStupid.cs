@@ -62,6 +62,15 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""54bf17fa-880b-4cea-9d39-ed719a89f9e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
                     ""action"": ""FireSplitter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afc68db5-cbaf-4c82-844d-210a45144f91"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -167,6 +187,15 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Light"",
+                    ""type"": ""Button"",
+                    ""id"": ""cbaa1437-8670-43e1-aa23-7ba0b5d60e14"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -224,6 +253,17 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8906ea88-58b7-4608-b6ac-3450fd2a31e7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Light"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -236,9 +276,11 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
         m_CharacterMove_Run = m_CharacterMove.FindAction("Run", throwIfNotFound: true);
         m_CharacterMove_FireWeapon = m_CharacterMove.FindAction("FireWeapon", throwIfNotFound: true);
         m_CharacterMove_FireSplitter = m_CharacterMove.FindAction("FireSplitter", throwIfNotFound: true);
+        m_CharacterMove_Jump = m_CharacterMove.FindAction("Jump", throwIfNotFound: true);
         // TargetDummy
         m_TargetDummy = asset.FindActionMap("TargetDummy", throwIfNotFound: true);
         m_TargetDummy_Move = m_TargetDummy.FindAction("Move", throwIfNotFound: true);
+        m_TargetDummy_Light = m_TargetDummy.FindAction("Light", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -302,6 +344,7 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterMove_Run;
     private readonly InputAction m_CharacterMove_FireWeapon;
     private readonly InputAction m_CharacterMove_FireSplitter;
+    private readonly InputAction m_CharacterMove_Jump;
     public struct CharacterMoveActions
     {
         private @NotStupid m_Wrapper;
@@ -310,6 +353,7 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_CharacterMove_Run;
         public InputAction @FireWeapon => m_Wrapper.m_CharacterMove_FireWeapon;
         public InputAction @FireSplitter => m_Wrapper.m_CharacterMove_FireSplitter;
+        public InputAction @Jump => m_Wrapper.m_CharacterMove_Jump;
         public InputActionMap Get() { return m_Wrapper.m_CharacterMove; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -331,6 +375,9 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
                 @FireSplitter.started -= m_Wrapper.m_CharacterMoveActionsCallbackInterface.OnFireSplitter;
                 @FireSplitter.performed -= m_Wrapper.m_CharacterMoveActionsCallbackInterface.OnFireSplitter;
                 @FireSplitter.canceled -= m_Wrapper.m_CharacterMoveActionsCallbackInterface.OnFireSplitter;
+                @Jump.started -= m_Wrapper.m_CharacterMoveActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_CharacterMoveActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_CharacterMoveActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_CharacterMoveActionsCallbackInterface = instance;
             if (instance != null)
@@ -347,6 +394,9 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
                 @FireSplitter.started += instance.OnFireSplitter;
                 @FireSplitter.performed += instance.OnFireSplitter;
                 @FireSplitter.canceled += instance.OnFireSplitter;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -356,11 +406,13 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_TargetDummy;
     private ITargetDummyActions m_TargetDummyActionsCallbackInterface;
     private readonly InputAction m_TargetDummy_Move;
+    private readonly InputAction m_TargetDummy_Light;
     public struct TargetDummyActions
     {
         private @NotStupid m_Wrapper;
         public TargetDummyActions(@NotStupid wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_TargetDummy_Move;
+        public InputAction @Light => m_Wrapper.m_TargetDummy_Light;
         public InputActionMap Get() { return m_Wrapper.m_TargetDummy; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -373,6 +425,9 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_TargetDummyActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_TargetDummyActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_TargetDummyActionsCallbackInterface.OnMove;
+                @Light.started -= m_Wrapper.m_TargetDummyActionsCallbackInterface.OnLight;
+                @Light.performed -= m_Wrapper.m_TargetDummyActionsCallbackInterface.OnLight;
+                @Light.canceled -= m_Wrapper.m_TargetDummyActionsCallbackInterface.OnLight;
             }
             m_Wrapper.m_TargetDummyActionsCallbackInterface = instance;
             if (instance != null)
@@ -380,6 +435,9 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Light.started += instance.OnLight;
+                @Light.performed += instance.OnLight;
+                @Light.canceled += instance.OnLight;
             }
         }
     }
@@ -390,9 +448,11 @@ public partial class @NotStupid : IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnFireWeapon(InputAction.CallbackContext context);
         void OnFireSplitter(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface ITargetDummyActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnLight(InputAction.CallbackContext context);
     }
 }

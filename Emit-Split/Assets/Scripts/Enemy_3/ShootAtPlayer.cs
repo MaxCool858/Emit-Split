@@ -20,7 +20,7 @@ public class ShootAtPlayer : MonoBehaviour
 
     
 
-
+    
     private void OnTriggerEnter(Collider other)
     {
 
@@ -89,6 +89,7 @@ public class ShootAtPlayer : MonoBehaviour
       
     }
 
+    //delay after every shot
     IEnumerator Reload()
     {
         yield return new WaitForSeconds(1);
