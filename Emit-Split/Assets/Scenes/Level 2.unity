@@ -1484,8 +1484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf7b2171e4bc9442b74096e97e9d8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 266930007}
-  position: {x: 0, y: 0, z: 0}
   Bullet_Emitter: {fileID: 1256540473}
   Bullet: {fileID: 4254431410554427162, guid: a4dc35be3148e1041a8be6d6e5ca9023, type: 3}
   ForceAmount: 200

@@ -5,9 +5,6 @@ using UnityEngine;
 public class ShootAtPlayer : MonoBehaviour
 {
 
-    public Transform playerTransform;
-
-    public Vector3 position;
 
     public GameObject Bullet_Emitter;
 
@@ -19,6 +16,9 @@ public class ShootAtPlayer : MonoBehaviour
     public bool inRange ;
 
 
+    public bool CanShoot;
+
+    
 
 
     private void OnTriggerEnter(Collider other)
@@ -26,56 +26,73 @@ public class ShootAtPlayer : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            ShootPlayer();
+            inRange = true;
+            CanShoot = true;
         }
-    
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
             inRange = false;
+            CanShoot = false;
         }
 
 
     }
 
-    // Update is called once per frame
+    // checks if player is in range, if so, then it shoots
+
     void Update()
     {
-        position = playerTransform.transform.position;
+      
 
-        if(inRange = true)
+
+
+        if (CanShoot == true && inRange == true)
         {
-            ShootPlayer();
-        }
+            
+             ShootPlayer();
+            CanShoot = false;
+            StartCoroutine(Reload());
+            
+        }   
 
-       
 
+        
     }
 
- 
 
-
-    private void ShootPlayer()
+    //shoots player 
+     private void ShootPlayer()
     {
 
-       GameObject Temporary_Buller_Handler;
+        
+
+            GameObject Temporary_Buller_Handler;
 
 
-       Temporary_Buller_Handler = Instantiate(Bullet, Bullet_Emitter.transform.position, Bullet_Emitter.transform.rotation);
+            Temporary_Buller_Handler = Instantiate(Bullet, Bullet_Emitter.transform.position, Bullet_Emitter.transform.rotation);
 
-        Temporary_Buller_Handler.transform.Rotate(Vector3.left * 90);
-
-
-        Rigidbody Temporary_RigidBody;
-        Temporary_RigidBody = Temporary_Buller_Handler.GetComponent<Rigidbody>();
-
-        Temporary_RigidBody.AddForce(transform.forward * ForceAmount);
-
-        Destroy(Temporary_Buller_Handler, 10.0f);
+            Temporary_Buller_Handler.transform.Rotate(Vector3.left * 90);
 
 
+            Rigidbody Temporary_RigidBody;
+            Temporary_RigidBody = Temporary_Buller_Handler.GetComponent<Rigidbody>();
+
+
+            Temporary_RigidBody.AddForce(transform.forward * ForceAmount);
+
+            Destroy(Temporary_Buller_Handler, 10.0f);
+
+            
+      
+    }
+
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(1);
+        CanShoot = true;
     }
 
 

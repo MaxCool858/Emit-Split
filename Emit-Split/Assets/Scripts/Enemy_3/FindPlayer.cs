@@ -40,9 +40,7 @@ public class FindPlayer : MonoBehaviour
       position = playerTransform.transform.position;
 
 
-        Debug.Log("IN range " + inRange);
-
-        if(inRange = true)
+        if(inRange == true)
         {
             LookAtPlayer();
         }
