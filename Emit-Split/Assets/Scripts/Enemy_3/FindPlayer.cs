@@ -4,20 +4,12 @@ using UnityEngine;
 
 public class FindPlayer : MonoBehaviour
 {
-    //public GameObject PlayerLocation;
 
     public Transform playerTransform;
 
     public Vector3 position;
 
-    public GameObject Bullet;
-
-    float ForceAmount = 10.0f;// or any value you want
-
-    private float speedofBullet = 5f;
-
-
-    public bool isShooting = false;
+    private bool inRange;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,16 +17,19 @@ public class FindPlayer : MonoBehaviour
         if(other.tag == "Player")
         {
 
-            LookAtPlayer();
-
-            ShootAtPlayer();
-
-            if(isShooting)
-            {
-                Shoot();
-            }
-
+            inRange = true;
+    
         }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            inRange = false;
+        }
+
 
     }
 
@@ -45,6 +40,13 @@ public class FindPlayer : MonoBehaviour
       position = playerTransform.transform.position;
 
 
+        Debug.Log("IN range " + inRange);
+
+        if(inRange = true)
+        {
+            LookAtPlayer();
+        }
+
 
     }
 
@@ -52,28 +54,6 @@ public class FindPlayer : MonoBehaviour
     {
         this.transform.LookAt(position);
 
-    }
-
-
-    
-    private void ShootAtPlayer()
-    {
-
-
-        Instantiate(Bullet, GetComponent<Transform>().position, GetComponent<Transform>().rotation);
-
-        isShooting = true;
-
-    }
-
-
-    IEnumerator Shoot()
-
-    {
-        Vector3 BullPos = Bullet.transform.position;
-        BullPos.z += Bullet.transform.position.z * speedofBullet * Time.deltaTime;
-        transform.position = BullPos;
-        yield return null;
     }
 
 

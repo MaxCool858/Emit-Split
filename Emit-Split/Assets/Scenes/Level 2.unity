@@ -1404,6 +1404,7 @@ GameObject:
   - component: {fileID: 221089666}
   - component: {fileID: 221089668}
   - component: {fileID: 221089669}
+  - component: {fileID: 221089670}
   m_Layer: 0
   m_Name: Enemy 3
   m_TagString: Enemy_3
@@ -1425,8 +1426,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 266930007}
   position: {x: 0, y: 0, z: 0}
-  Bullet: {fileID: 4254431410554427162, guid: a4dc35be3148e1041a8be6d6e5ca9023, type: 3}
-  isShooting: 0
 --- !u!4 &221089667
 Transform:
   m_ObjectHideFlags: 0
@@ -1434,16 +1433,17 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221089665}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.017, y: 35.758, z: 606.617}
+  m_LocalRotation: {x: -0, y: -0.74903494, z: -0, w: 0.6625305}
+  m_LocalPosition: {x: -6.479476, y: 35.758, z: 606.73065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1256540474}
   - {fileID: 413693488}
   - {fileID: 679121547}
   - {fileID: 1451857110}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -97.014, z: 0}
 --- !u!114 &221089668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1470,8 +1470,26 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12.080489, y: 4.0059166, z: 11.650818}
-  m_Center: {x: -0.2023921, y: -0.13110542, z: -0.4499817}
+  m_Size: {x: 22.64619, y: 10.060486, z: 25.000488}
+  m_Center: {x: 0.21866417, y: -0.08423233, z: 0.29449463}
+--- !u!114 &221089670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221089665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf7b2171e4bc9442b74096e97e9d8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 266930007}
+  position: {x: 0, y: 0, z: 0}
+  Bullet_Emitter: {fileID: 1256540473}
+  Bullet: {fileID: 4254431410554427162, guid: a4dc35be3148e1041a8be6d6e5ca9023, type: 3}
+  ForceAmount: 200
+  inRange: 0
 --- !u!1 &226230002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2914,7 +2932,6 @@ GameObject:
   - component: {fileID: 413693491}
   - component: {fileID: 413693490}
   - component: {fileID: 413693489}
-  - component: {fileID: 413693492}
   m_Layer: 0
   m_Name: ENEMY 3
   m_TagString: Untagged
@@ -2934,7 +2951,7 @@ Transform:
   m_LocalScale: {x: 0.4445594, y: 1.1909664, z: 0.4445594}
   m_Children: []
   m_Father: {fileID: 221089667}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &413693489
 BoxCollider:
@@ -2998,22 +3015,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413693487}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &413693492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413693487}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5878252924e5e304ea2eb6e9b760bc04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  position: {x: 0, y: 0, z: 0}
-  Bullet: {fileID: 0}
-  isShooting: 0
 --- !u!1 &428557165 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4254431410554427162, guid: a4dc35be3148e1041a8be6d6e5ca9023, type: 3}
@@ -4689,7 +4690,7 @@ Transform:
   m_LocalScale: {x: 0.7026706, y: 0.60280794, z: 0.7026706}
   m_Children: []
   m_Father: {fileID: 221089667}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &679121548
 BoxCollider:
@@ -8230,6 +8231,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 136
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &1256540473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1256540474}
+  m_Layer: 0
+  m_Name: Bullet_Emitter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1256540474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256540473}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.001, y: -0.017, z: 0.846}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 221089667}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1262784081
 GameObject:
   m_ObjectHideFlags: 0
@@ -10257,7 +10288,6 @@ GameObject:
   - component: {fileID: 1451857110}
   - component: {fileID: 1451857113}
   - component: {fileID: 1451857112}
-  - component: {fileID: 1451857111}
   m_Layer: 0
   m_Name: ENEMY 3 (2)
   m_TagString: Untagged
@@ -10277,21 +10307,8 @@ Transform:
   m_LocalScale: {x: 0.26739803, y: 0.24641094, z: 0.4445594}
   m_Children: []
   m_Father: {fileID: 221089667}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1451857111
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1451857109}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1451857112
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13677,7 +13694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4254431410554427158, guid: a4dc35be3148e1041a8be6d6e5ca9023, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7
+      value: 61.15
       objectReference: {fileID: 0}
     - target: {fileID: 4254431410554427158, guid: a4dc35be3148e1041a8be6d6e5ca9023, type: 3}
       propertyPath: m_LocalPosition.y
