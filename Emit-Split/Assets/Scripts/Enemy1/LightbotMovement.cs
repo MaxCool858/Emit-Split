@@ -14,7 +14,7 @@ public class LightbotMovement : MonoBehaviour
     {
         transform.Translate(botVector.x * speed * Time.deltaTime, 0, botVector.y * speed * Time.deltaTime);
 
-        if (spotlightOn)
+        if (spotlightOn && !GetComponent<Battery>().batteryDead)
         {
             spotlight.SetActive(true);
         }
@@ -41,10 +41,20 @@ public class LightbotMovement : MonoBehaviour
             if (spotlightOn)
             {
                 spotlightOn = false;
+                GetComponent<Battery>().lightOn = false;
             }
             else
             {
-                spotlightOn = true;
+                if (!GetComponent<Battery>().batteryDead)
+                { 
+                    spotlightOn = true;               
+                    GetComponent<Battery>().lightOn = true;
+                }
+                else
+                {
+                    print("Battery Dead");
+                }
+               
             }
         }
     }
