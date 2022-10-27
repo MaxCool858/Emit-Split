@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HiddenObjects : MonoBehaviour
 {
-    public GameObject lightSource;
     public GameObject hiddenObject;
     private bool objectHidden;
     private void Awake()

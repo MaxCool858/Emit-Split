@@ -8,6 +8,7 @@ public class Battery : MonoBehaviour
     private float batteryLevel;
     private int maxCharge = 20;
     private float decayTime = 1;
+    private float chargeTime = 2;
 
     public bool lightOn;
     public bool batteryDead;
@@ -55,7 +56,7 @@ public class Battery : MonoBehaviour
         {
             if(batteryLevel <= maxCharge)
             {
-                batteryLevel += decayTime * Time.deltaTime;
+                batteryLevel += chargeTime * Time.deltaTime;
                 Debug.Log("battery level " + batteryLevel);
             }
             else

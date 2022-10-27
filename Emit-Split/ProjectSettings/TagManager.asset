@@ -8,6 +8,8 @@ TagManager:
   - vent
   - light
   - charger
+  - player
+  - heavy
   layers:
   - Default
   - TransparentFX
