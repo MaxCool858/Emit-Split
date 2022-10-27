@@ -16,6 +16,7 @@ TagManager:
   - Enemy_3
   - CamTarget
   - Bullet
+  - Sphere
   layers:
   - Default
   - TransparentFX

@@ -62,6 +62,7 @@ public class CameraRayCast : MonoBehaviour
                 TargetSearch.enabled = false;
                 EnemyTargeted = hit.transform.gameObject;
 
+              
                 //enable wehn fixing
                 /*
                 Player.GetComponent<UIManagement>().enabled = false;
@@ -88,6 +89,5 @@ public class CameraRayCast : MonoBehaviour
         }
 
     }
-
    
 }

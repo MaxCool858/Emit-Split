@@ -92,7 +92,7 @@ public class ShootAtPlayer : MonoBehaviour
     //delay after every shot
     IEnumerator Reload()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         CanShoot = true;
     }
 

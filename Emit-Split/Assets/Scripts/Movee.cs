@@ -19,6 +19,10 @@ public class Movee : MonoBehaviour
 
     public Transform shootpoint;//where the splitter raycast is launched from
 
+    public Transform Camera1;
+
+
+
     public GameObject Fist;//object with hitbox that works as melee attack
 
     GameObject player; //the player's gameobject
@@ -79,7 +83,7 @@ public class Movee : MonoBehaviour
     void FireSplitter() //detects a left click and will fire raycast. switch the player into the enemy if it detects one.
     {
         player.GetComponent<UIManagement>().LoseEnergy(0);
-        Ray ray = new Ray(shootpoint.position, transform.forward); //shoots ray out of shootpoint transform.
+        Ray ray = new Ray(Camera1.position, transform.forward); //shoots ray out of shootpoint transform.
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
         Debug.DrawRay(ray.origin, ray.direction * 10);
@@ -89,6 +93,14 @@ public class Movee : MonoBehaviour
         {
             SwapTo(hit); //if you hit an enemy (tagged as Hurty) switch to that enemy
         }
+
+        else if (hit.collider != null && hit.collider.gameObject.tag == "Enemy_3")
+        {
+            SwapTo(hit);
+        }
+
+
+
     }
 
     private void SwapTo(RaycastHit hit) //swaps you to the enemy you hit with splitter
@@ -103,6 +115,9 @@ public class Movee : MonoBehaviour
 
 
     }
+
+    
+
 
     void onMoveInput(InputAction.CallbackContext ctx) //if the player presses WASD detect which keys they are pressing and set that to the input.
     {
