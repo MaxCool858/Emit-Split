@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-public class Movee : MonoBehaviour
+public class Enemy3Movee : MonoBehaviour
 {
     NotStupid playerInput;
     Vector2 CurrentInput;//recieves player inputs
@@ -15,6 +14,7 @@ public class Movee : MonoBehaviour
     private float turnSmoothVelocity;
     bool isMoving; //detects button presses
     bool isRunPressed; //detects running
+    bool isDrilling;
     //float rotationPerFrame = 1.0f; //rotation speed of player
     int speed = 5; //player speed
 
@@ -31,8 +31,6 @@ public class Movee : MonoBehaviour
     PlayerInput InputMaps;
 
     public Transform shootpoint;//where the splitter raycast is launched from
-
-    public GameObject Fist;//object with hitbox that works as melee attack
 
     public GameObject player; //the player's current object
 
@@ -80,10 +78,9 @@ public class Movee : MonoBehaviour
         player = GameObject.Find("Playber"); //sets the player object to an object in the scene with name "Playber"
         shootpoint = GameObject.Find("shootpoint").transform; //finds the shootpoint on the player.
         InputMaps = player.GetComponent<PlayerInput>();
-        
+
         OriginPlayer = player;
         OriginController = playercontrol;
-        //Fist = GameObject.Find("Fist");
         SetUpForJump();
     }
 
@@ -96,16 +93,13 @@ public class Movee : MonoBehaviour
 
     void FireWeapon() //activates the fist for a moment
     {
-        OriginPlayer.GetComponent<UIManagement>().LoseEnergy(10);
-        Fist.SetActive(true);
-        StartCoroutine(HitDelay());
-        //Fist.SetActive(false);
+
     }
 
     IEnumerator HitDelay() //Sets the fist to false again after the attack
     {
         yield return new WaitForSeconds(1);
-        Fist.SetActive(false);
+
     }
 
     void FireSplitter() //detects a left click and will fire raycast. switch the player into the enemy if it detects one.
@@ -134,39 +128,14 @@ public class Movee : MonoBehaviour
 
         if (EnemyType == 2)
         {
-            OriginPlayer.GetComponent<UIManagement>().Enemy2Tutorial();
             GameObject tempenemy = hit.collider.gameObject;
             CharacterController tempenemycontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;
-            Transform tempgroundcheck = hit.collider.gameObject.GetComponent<EnemyClass>().groundcheck;
             tempenemycontrol.enabled = true;
             playercontrol.enabled = false;
-            CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;
-            CameraTarget.GetComponent<CameraFollow>().p2 = tempenemy.transform;
-            CameraTarget.GetComponent<CameraFollow>().Transition();
             CameraTarget.GetComponent<CameraFollow>().player = tempenemy;
             this.GetComponent<Enemy2Movee>().enabled = true;
             this.GetComponent<Enemy2Movee>().player = tempenemy;
             this.GetComponent<Enemy2Movee>().playercontrol = tempenemycontrol;
-            this.GetComponent<Enemy2Movee>().groundCheck = tempgroundcheck;
-            this.GetComponent<Movee>().enabled = false;
-        }
-
-        if (EnemyType == 99)
-        {
-            OriginPlayer.GetComponent<UIManagement>().Enemy3Tutorial();
-            GameObject tempenemy = hit.collider.gameObject;
-            CharacterController tempenemycontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;
-            Transform tempgroundcheck = hit.collider.gameObject.GetComponent<EnemyClass>().groundcheck;
-            tempenemycontrol.enabled = true;
-            playercontrol.enabled = false;
-            CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;
-            CameraTarget.GetComponent<CameraFollow>().p2 = tempenemy.transform;
-            CameraTarget.GetComponent<CameraFollow>().Transition();
-            CameraTarget.GetComponent<CameraFollow>().player = tempenemy;
-            this.GetComponent<Enemy3Movee>().enabled = true;
-            this.GetComponent<Enemy3Movee>().player = tempenemy;
-            this.GetComponent<Enemy3Movee>().playercontrol = tempenemycontrol;
-            this.GetComponent<Enemy3Movee>().groundCheck = tempgroundcheck;
             this.GetComponent<Movee>().enabled = false;
         }
 
@@ -241,7 +210,7 @@ public class Movee : MonoBehaviour
 
     }
 
-    
+
     void ExecuteJump()
     {
         if (!isJumping && isJumpPressed)
@@ -249,9 +218,9 @@ public class Movee : MonoBehaviour
             isJumping = true;
             CurrentMovement.y = initialjumpvelocity;
             CurrentRunMovement.y = initialjumpvelocity;
-            
+
         }
-        else if (isJumping && playercontrol.isGrounded) 
+        else if (isJumping && playercontrol.isGrounded)
         {
             isJumping = false;
             isJumpPressed = false;
@@ -261,26 +230,23 @@ public class Movee : MonoBehaviour
 
     void activeGravity() //detects if player is "grounded" and gives them gravity appropriately
     {
-        if (playercontrol.isGrounded)
+        if (isGrounded)
         {
-            CurrentMovement.y += groundGravity;
+            velocity.y = groundGravity;
 
         }
         else
         {
-            //float previousYVelo = CurrentMovement.y;
-            //float newYVelocity = CurrentMovement.y - (gravity * Time.deltaTime);
-            //float nextYVelocity = (previousYVelo + newYVelocity) * .5f; //variable to ensure player's framerate doesn't effect jump arc.
+            if (isRunPressed)
+            {
+                velocity.y = (groundGravity) * Time.deltaTime;
+            }
+            else
+            {
+                velocity.y = gravity * Time.deltaTime;
+            }
 
-                CurrentMovement.y += gravity * Time.deltaTime;
-                CurrentRunMovement.y += gravity * Time.deltaTime;
-
-                //CurrentMovement.y += (gravity * 0.1f) * Time.deltaTime;
         }
-
-        //float Y_Value = CurrentMovement.y;
-
-        //return Y_Value;
     }
 
     // Update is called once per frame
@@ -289,40 +255,25 @@ public class Movee : MonoBehaviour
         //RotatePlayer();
         //Debug.Log(velocity);
         onMoveInput();
-        
-        
+
+
 
         if (playerInput.CharacterMove.FireWeapon.triggered && OriginPlayer.GetComponent<UIManagement>().Energy >= 10)//detects pressing fireweapon
         {
             FireWeapon();
         }
-        if (playerInput.CharacterMove.FireSplitter.triggered && OriginPlayer.GetComponent<UIManagement>().Energy >= 50) //detects splitter
+        if (playerInput.CharacterMove.ReturntoOrigin.triggered && OriginPlayer.GetComponent<UIManagement>().Energy >= 0) //detects splitter
         {
-            FireSplitter();
+            OriginReturn();
         }
-        if (playerInput.CharacterMove.DismissOpening.triggered && OriginPlayer.GetComponent<UIManagement>().Energy >= 50) //detects splitter
+        if (playerInput.CharacterMove.Interact.triggered && OriginPlayer.GetComponent<UIManagement>().LeverText1.activeInHierarchy) //detects splitter
         {
-            RemoveOpening();
+            OriginPlayer.GetComponent<UIManagement>().ActivateLever1();
         }
-        if (playerInput.CharacterMove.Interact.triggered && OriginPlayer.GetComponent<UIManagement>().DoorText2.activeInHierarchy)
-        {
-            RevealEnding();
-        }
-        if (playerInput.CharacterMove.Jump.triggered && isGrounded) 
+        if (playerInput.CharacterMove.Jump.triggered && isGrounded)
         {
             velocity.y = Mathf.Sqrt(maxJumpHeight * -2f * gravity);
         }
-
-        if (isRunPressed && OriginPlayer.GetComponent<UIManagement>().Energy >= 0.1)
-        {
-            playercontrol.Move(CurrentMovement * Time.deltaTime * speed * RunMultiplier);
-            OriginPlayer.GetComponent<UIManagement>().Energy = OriginPlayer.GetComponent<UIManagement>().Energy - 0.1f;
-        }
-        else
-        {
-            playercontrol.Move(CurrentMovement * Time.deltaTime * speed);
-        }
-
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -334,20 +285,56 @@ public class Movee : MonoBehaviour
         {
             velocity.y += gravity * Time.deltaTime;
         }
-        
+
+        if (isRunPressed && OriginPlayer.GetComponent<UIManagement>().Energy >= 0.1)
+        {
+            isDrilling = true;
+            OriginPlayer.GetComponent<UIManagement>().Energy = OriginPlayer.GetComponent<UIManagement>().Energy - 0.1f;
+            playercontrol.Move(CurrentMovement * Time.deltaTime * speed * RunMultiplier);
+        }
+        else
+        {
+            isDrilling = false;
+            playercontrol.Move(CurrentMovement * Time.deltaTime * speed);
+        }
+
+
         playercontrol.Move(velocity);
 
-        
+        if (isDrilling)
+        {
+            player.GetComponent<MeshRenderer>().enabled = false;
+            GameObject hat = player.GetComponent<TargetDummy>().Hat;
+            hat.transform.localPosition = new Vector3(0, -1.75f, 0);
+            player.GetComponent<TargetDummy>().dirtparticles.SetActive(true);
+            player.GetComponent<TargetDummy>().digbox.SetActive(true);
+        }
+        if (!isDrilling)
+        {
+            player.GetComponent<MeshRenderer>().enabled = true;
+            GameObject hat = player.GetComponent<TargetDummy>().Hat;
+            hat.transform.localPosition = new Vector3(0, 0, 0);
+            player.GetComponent<TargetDummy>().dirtparticles.SetActive(false);
+            player.GetComponent<TargetDummy>().digbox.SetActive(false);
+        }
+
     }
 
-    void RemoveOpening()
+    void OriginReturn()
     {
-        OriginPlayer.GetComponent<UIManagement>().Opening.SetActive(false);
-    }
+        OriginPlayer.GetComponent<UIManagement>().HideTutorial();
+        playercontrol.enabled = false;
+        player.tag = "Hurty";
+        OriginController.enabled = true;
+        CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;
+        CameraTarget.GetComponent<CameraFollow>().p2 = OriginPlayer.transform;
+        CameraTarget.GetComponent<CameraFollow>().Transition();
+        CameraTarget.GetComponent<CameraFollow>().player = OriginPlayer;
+        this.GetComponent<Movee>().enabled = true;
+        this.GetComponent<Movee>().player = OriginPlayer;
+        this.GetComponent<Movee>().playercontrol = OriginController;
 
-    void RevealEnding()
-    {
-        OriginPlayer.GetComponent<UIManagement>().StartEnding();
+        this.GetComponent<Enemy3Movee>().enabled = false;
     }
 
     void OnEnable()//Activates player controls when you call this function
@@ -369,22 +356,7 @@ public class Movee : MonoBehaviour
             OriginController.GetComponent<UIManagement>().AddCoin(1);
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.tag == "Door")
-        {
-            OriginController.GetComponent<UIManagement>().DoorTextReveal();
-        }
-
-
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Door")
-        {
-            OriginController.GetComponent<UIManagement>().DoorTextHide();
-        }
-    }
-
-
 
 
 }

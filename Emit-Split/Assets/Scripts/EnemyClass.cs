@@ -7,7 +7,11 @@ public class EnemyClass : MonoBehaviour
     public int Health;
     public GameObject self;
 
+    public Transform groundcheck;
+
     public CharacterController enemycontrol;
+
+    public int EnemyTypeNum;
 
     // Start is called before the first frame update
     void Start()
