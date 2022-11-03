@@ -8,31 +8,50 @@ public class UpDownMove : MonoBehaviour
     public bool BlockOn3 = false;
 
     public GameObject P2;
-    public GameObject P3;
+    public GameObject P5;
 
     public GameObject BlueBlock;
 
     public int speed = 2;
 
-    private void Awake()
-    {
-        //Transform me = transform.position;
-    }
+    
 
    private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Bullet" && BlockOn2 == true)
+        if(other.tag == "Player" && BlockOn2 == true)
         {
-            //transform.position = new Vector3(P3.transform.position,P3.transform.rotation);
-            
+            StartCoroutine("Teleporting");
+            BlockOn2 = false;
+            BlockOn3 = true;
         }
-        else if (other.tag == "Bullet" && BlockOn3 == true)
+        else if (other.tag == "Player" && BlockOn3 == true)
         {
-            //move into p2
+            StartCoroutine("Teleporting2");
+            BlockOn2 = true;
+            BlockOn3 = false;
         }
 
     }
 
+
+    IEnumerator Teleporting()
+    {
+
+        yield return new WaitForSeconds(.5f);
+
+        BlueBlock.transform.position = P5.transform.position;
+
+    }
+
+
+    IEnumerator Teleporting2()
+    {
+
+        yield return new WaitForSeconds(.5f);
+
+        BlueBlock.transform.position = P2.transform.position;
+
+    }
 
 
 }

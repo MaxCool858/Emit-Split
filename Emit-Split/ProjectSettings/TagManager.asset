@@ -17,6 +17,12 @@ TagManager:
   - CamTarget
   - Bullet
   - Sphere
+  - Diggable
+  - Door
+  - Lever
+  - Coin
+  - Teleporter_1
+  - Teleporter_2
   layers:
   - Default
   - TransparentFX
@@ -24,7 +30,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - ground
   - 
   - 
   - 

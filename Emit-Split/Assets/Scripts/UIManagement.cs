@@ -84,7 +84,7 @@ public class UIManagement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        EnergyBar.GetComponent<Scrollbar>().size = Energy * 0.01f;
+       // EnergyBar.GetComponent<Scrollbar>().size = Energy * 0.01f;
         if (Energy < 100)
         {
             Energy = Energy + 0.2f;
