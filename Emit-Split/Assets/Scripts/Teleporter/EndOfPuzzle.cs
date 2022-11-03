@@ -26,7 +26,7 @@ public class EndOfPuzzle : MonoBehaviour
     public bool spawnGreen;
 
 
-    public bool ActivatedOnce;
+    public bool ActivatedOnce = false;
 
     //spawns a key next to pad
     //spawns a teleporter 1- 
@@ -41,7 +41,7 @@ public class EndOfPuzzle : MonoBehaviour
         if (ActivatedOnce == false)
         {
 
-            if (other.tag == "Player")
+            if (other.tag == "Player" || other.tag == "Hurty")
             {
                 if (spawnRed == true)
                 {

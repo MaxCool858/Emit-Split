@@ -125,6 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4320794db56bef41b1600856711da46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xForce: 10
-  yForce: 10
-  zForce: 10
+  xForce: 50
+  yForce: 50
+  zForce: 50
