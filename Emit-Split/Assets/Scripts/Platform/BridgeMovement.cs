@@ -6,7 +6,7 @@ using UnityEngine;
 public class BridgeMovement : MonoBehaviour
 {
     //the speed that the platform moves
-    private float speed = 10f;
+    private float speed = 5f;
     private float spinSpeed = 30f;
 
     //the vertical position of the object
@@ -37,7 +37,7 @@ public class BridgeMovement : MonoBehaviour
     void Update()
     {
         UpAndDown();
-        transform.Rotate(0, spinSpeed * Time.deltaTime, 0);
+        //transform.Rotate(0, spinSpeed * Time.deltaTime, 0);
     }
 
     //Method to move the platform up and down
