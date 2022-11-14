@@ -23,6 +23,8 @@ TagManager:
   - Coin
   - Teleporter_1
   - Teleporter_2
+  - Boss
+  - Acid
   layers:
   - Default
   - TransparentFX
