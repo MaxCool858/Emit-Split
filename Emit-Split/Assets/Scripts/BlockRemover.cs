@@ -55,9 +55,9 @@ public class BlockRemover : MonoBehaviour
 
 
         Sphere =  Instantiate(SpherePrefab, P1.transform.position, P1.transform.rotation);
-        BlueBlock = Instantiate(BluePrefab, P7.transform.position, P7.transform.rotation);
-        RedBlock = Instantiate(RedPrefab, P8.transform.position, P8.transform.rotation);
-        OrangeBlock = Instantiate(OrangePrefab, P4.transform.position, P4.transform.rotation);
+        BlueBlock = Instantiate(BluePrefab, P4.transform.position, P4.transform.rotation);
+        RedBlock = Instantiate(RedPrefab, P3.transform.position, P3.transform.rotation);
+        OrangeBlock = Instantiate(OrangePrefab, P2.transform.position, P2.transform.rotation);
 
         
 

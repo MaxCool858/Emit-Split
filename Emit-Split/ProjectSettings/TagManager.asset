@@ -25,6 +25,11 @@ TagManager:
   - Teleporter_2
   - Boss
   - Acid
+  - Exploder_Red
+  - Exploder_Blue
+  - Exploder_Green
+  - CP
+  - Death
   layers:
   - Default
   - TransparentFX

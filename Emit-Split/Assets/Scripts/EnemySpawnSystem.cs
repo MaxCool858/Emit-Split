@@ -11,47 +11,41 @@ public class EnemySpawnSystem : MonoBehaviour
 
     public GameObject Spawn;
 
-    public bool EnemyinRange =true;
+    public bool EnemyAlive =true;
 
-   void Update()
+    public float timeValue = 10;
+
+
+
+    void Update()
     {
-        if(EnemyinRange == false)
+
+        if(GameObject.Find("Hurty") != null)
         {
-            CheckRadius();
+            EnemyAlive = true;
+
+        }
+        else
+        {
+            EnemyAlive = false;
+        }
+
+        if (EnemyAlive == false)
+
+        {
+            SpawnEnemy();
         }
 
     }
 
-    void OnTriggerEnter (Collider other)
+
+    private void SpawnEnemy()
     {
-        
 
-        if (other.tag == "Hurty" )
-        {
-            EnemyinRange = true;
-
-        }
+      Instantiate(Enemy1, Spawn.transform.position, Spawn.transform.rotation);
 
     }
 
-    void OnTriggerExit (Collider other)
-    {
-        if(other.tag == "Hurty")
-        {
-            EnemyinRange = false;
-        }
-    }
-
-
-    private void CheckRadius()
-    {
-
-        GameObject EnemyX;
-
-
-        EnemyX = Instantiate(Enemy1, Spawn.transform.position, Spawn.transform.rotation);
-
-    }
 
 
 }

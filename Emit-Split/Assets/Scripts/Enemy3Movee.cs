@@ -257,16 +257,18 @@ public class Enemy3Movee : MonoBehaviour
         onMoveInput();
 
 
-
-        if (playerInput.CharacterMove.FireWeapon.triggered && OriginPlayer.GetComponent<UIManagement>().Energy >= 10)//detects pressing fireweapon
+        //&& OriginPlayer.GetComponent<UIManagement>().Energy >= 10
+        if (playerInput.CharacterMove.FireWeapon.triggered )//detects pressing fireweapon
         {
             FireWeapon();
         }
-        if (playerInput.CharacterMove.ReturntoOrigin.triggered && OriginPlayer.GetComponent<UIManagement>().Energy >= 0) //detects splitter
+        //&& OriginPlayer.GetComponent<UIManagement>().Energy >= 0)
+        if (playerInput.CharacterMove.ReturntoOrigin.triggered ) //detects splitter
         {
             OriginReturn();
         }
-        if (playerInput.CharacterMove.Interact.triggered && OriginPlayer.GetComponent<UIManagement>().LeverText1.activeInHierarchy) //detects splitter
+        //&& OriginPlayer.GetComponent<UIManagement>().LeverText1.activeInHierarchy
+        if (playerInput.CharacterMove.Interact.triggered ) //detects splitter
         {
             OriginPlayer.GetComponent<UIManagement>().ActivateLever1();
         }
@@ -322,7 +324,7 @@ public class Enemy3Movee : MonoBehaviour
 
     void OriginReturn()
     {
-        OriginPlayer.GetComponent<UIManagement>().HideTutorial();
+        // OriginPlayer.GetComponent<UIManagement>().HideTutorial();
         playercontrol.enabled = false;
         player.tag = "Hurty";
         OriginController.enabled = true;

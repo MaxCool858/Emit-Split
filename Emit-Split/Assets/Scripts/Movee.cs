@@ -428,6 +428,7 @@ public class Movee : MonoBehaviour
 
 
 
+
     }
     private void OnTriggerExit(Collider other)
     {
