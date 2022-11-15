@@ -13,28 +13,22 @@ public class EnemySpawnSystem : MonoBehaviour
 
     public bool EnemyAlive =true;
 
-    public float timeValue = 10;
+    public float timeValue = 30;
 
 
 
     void Update()
     {
-
-        if(GameObject.Find("Hurty") != null)
+        if (timeValue > 0)
         {
-            EnemyAlive = true;
-
+            timeValue -= Time.deltaTime;
         }
         else
         {
-            EnemyAlive = false;
-        }
-
-        if (EnemyAlive == false)
-
-        {
+            timeValue += 30;
             SpawnEnemy();
         }
+
 
     }
 
