@@ -122,7 +122,7 @@ public class Movee : MonoBehaviour
 
     void FireSplitter() //detects a left click and will fire raycast. switch the player into the enemy if it detects one.
     {
-        OriginPlayer.GetComponent<UIManagement>().LoseEnergy(0);
+      //  OriginPlayer.GetComponent<UIManagement>().LoseEnergy(0);
         Ray ray = new Ray(shootpoint.position, transform.forward); //shoots ray out of shootpoint transform.
         RaycastHit hit;
         Physics.Raycast(ray, out hit);

@@ -12,6 +12,7 @@ public class RingExpand : MonoBehaviour
     public float speed = 10f;
     Vector3 temp;
     Vector3 temp2;
+
     // Update is called once per frame
     void Update()
     {

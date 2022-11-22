@@ -30,6 +30,7 @@ TagManager:
   - Exploder_Green
   - CP
   - Death
+  - Ring
   layers:
   - Default
   - TransparentFX

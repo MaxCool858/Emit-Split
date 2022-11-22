@@ -29,7 +29,7 @@ public class Boss_Mechanics : MonoBehaviour
 
 
     //Timer
-    public float timeValue = 10;
+    public float timeValue = 2;
 
     //Ring Spawn
     public GameObject Ring;
@@ -41,24 +41,21 @@ public class Boss_Mechanics : MonoBehaviour
     public bool Phase2 = false;
     public bool Phase3 = false;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
+    //render
+    public Renderer rend;
 
+    void Start()
+    {
+        ChangeColor();
+        SpawnEnemies();
+        RingSpawn();
+        rend = GetComponent<Renderer>();
+        rend.enabled = true;
 
     }
-
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("phase1: " + Phase1);
-        Debug.Log("phase2: " + Phase2); 
-        Debug.Log("phase3: " + Phase3);
-        Debug.Log("redon: " + RedOn); 
-        Debug.Log("blueon: " + BlueOn);
-        Debug.Log("greenon: " + GreenOn);
-
-
         
             if (timeValue > 0)
             {
@@ -110,7 +107,6 @@ public class Boss_Mechanics : MonoBehaviour
         {
             if (Phase1)
             {
-
 
                 if (SpawnCycle1)
                 {
@@ -236,9 +232,19 @@ public class Boss_Mechanics : MonoBehaviour
         void RingSpawn()
 
         {
+         if (Phase1)
+          {
+
             Instantiate(Ring, RingSpawner.transform.position, RingSpawner.transform.rotation);
 
+          }
+    
+
         }
+
+
+
+
 
         void OnTriggerEnter(Collider other)
         {
@@ -278,11 +284,13 @@ public class Boss_Mechanics : MonoBehaviour
             {
                 Phase1 = false;
                 Phase2 = true;
+               
             }
             else if (Phase2)
             {
                 Phase2 = false;
                 Phase3 = true;
+          
             }
             else if (Phase3)
             {
@@ -294,6 +302,11 @@ public class Boss_Mechanics : MonoBehaviour
         {
         Destroy(this.gameObject);
         }
+
+
+
+
+
     }
 
 
