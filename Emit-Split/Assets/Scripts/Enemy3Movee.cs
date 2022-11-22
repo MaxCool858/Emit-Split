@@ -257,18 +257,16 @@ public class Enemy3Movee : MonoBehaviour
         onMoveInput();
 
 
-        //&& OriginPlayer.GetComponent<UIManagement>().Energy >= 10
-        if (playerInput.CharacterMove.FireWeapon.triggered )//detects pressing fireweapon
+
+        if (playerInput.CharacterMove.FireWeapon.triggered && OriginPlayer.GetComponent<UIManagement>().Energy >= 10)//detects pressing fireweapon
         {
             FireWeapon();
         }
-        //&& OriginPlayer.GetComponent<UIManagement>().Energy >= 0)
-        if (playerInput.CharacterMove.ReturntoOrigin.triggered ) //detects splitter
+        if (playerInput.CharacterMove.ReturntoOrigin.triggered && OriginPlayer.GetComponent<UIManagement>().Energy >= 0) //detects splitter
         {
             OriginReturn();
         }
-        //&& OriginPlayer.GetComponent<UIManagement>().LeverText1.activeInHierarchy
-        if (playerInput.CharacterMove.Interact.triggered ) //detects splitter
+        if (playerInput.CharacterMove.Interact.triggered && OriginPlayer.GetComponent<UIManagement>().LeverText1.activeInHierarchy) //detects splitter
         {
             OriginPlayer.GetComponent<UIManagement>().ActivateLever1();
         }
@@ -324,7 +322,7 @@ public class Enemy3Movee : MonoBehaviour
 
     void OriginReturn()
     {
-        // OriginPlayer.GetComponent<UIManagement>().HideTutorial();
+        OriginPlayer.GetComponent<UIManagement>().HideTutorial();
         playercontrol.enabled = false;
         player.tag = "Hurty";
         OriginController.enabled = true;
@@ -357,6 +355,11 @@ public class Enemy3Movee : MonoBehaviour
         {
             OriginController.GetComponent<UIManagement>().AddCoin(1);
             Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "HealthPack")
+        {
+            Destroy(collision.gameObject);
+            OriginController.GetComponent<UIManagement>().GainHealth(1);
         }
     }
 

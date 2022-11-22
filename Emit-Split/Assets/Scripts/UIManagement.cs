@@ -6,11 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class UIManagement : MonoBehaviour
 {
-    public CharacterController playercontrol;
 
- public GameObject player;
-    public int maxHealth = 10;
-    public int currentHealth;
+    GameObject player;
+    int Health = 10;
     public float Energy = 100;
     public float coins;
     public Text healthtext;
@@ -44,25 +42,12 @@ public class UIManagement : MonoBehaviour
 
     public int CurrentTutorial;
 
-
-    //Respawn
-    private bool isRespawning;
-    private Vector3 respawnPoint;
-    private Vector3 currentPoint;
-
-
     // Start is called before the first frame update
     void Start()
     {
-        playercontrol = GetComponent<CharacterController>();
-
-        //   player = GameObject.Find("Playber");
+        player = GameObject.Find("Playber");
         EnergyBar = GameObject.Find("EnergyBar");
         HealthBar = GameObject.Find("HealthBar");
-
-        respawnPoint = player.transform.position;
-
-        
         
     }
 
@@ -70,69 +55,11 @@ public class UIManagement : MonoBehaviour
     {
         if (other.tag == "Hurty") 
         {
-            TakeDamage();
+            Health = Health - 1;
+            healthtext.text = "Health: " + Health.ToString();
+            HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
         }
-
-        if(other.tag == "Ring")
-        {
-            TakeDamage();
-        }
-
-
     }
-    public void TakeDamage()
-    {
-        if(currentHealth <= 0)
-        {
-            StartCoroutine(Teleporting());
-        }
-
-        else
-        {
-            // Debug.Log("Health " + currentHealth);
-            Debug.Log("respawn" + respawnPoint);
-            Debug.Log("current" + currentPoint);
-
-            currentHealth = currentHealth - 1;
-        healthtext.text = "Health: " + currentHealth.ToString();
-        HealthBar.GetComponent<Scrollbar>().size = currentHealth * 0.1f;
-
-        }
-
-
-
-
-    }
-
-    IEnumerator Teleporting()
-    {
-        playercontrol.enabled = false;
-
-        yield return new WaitForSeconds(.5f);
-
-        //player.transform.position = respawnPoint.transform.position;
-        currentPoint = respawnPoint;
-        yield return new WaitForSeconds(.5f);
-
-        playercontrol.enabled = true;
-
-        currentHealth = maxHealth;
-
-
-    }
-
-    public void Respawn()
-    {
-
-  
-
-       // currentPoint = player.transform.position;
-
-       // currentPoint = respawnPoint;
-        currentHealth = maxHealth;
-
-    }
-
 
     public void LoseEnergy(int energysubtract)
     {
@@ -140,14 +67,22 @@ public class UIManagement : MonoBehaviour
        
         //Debug.Log(Energy);
     }
-    /*
+
     public void LoseHealth(int healthsubtract)
     {
         Health -= healthsubtract;
         healthtext.text = "Health: " + Health.ToString();
         HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
+        if (Health <= 0) ResetGame();
     }
-    */
+
+    public void GainHealth(int healthadd)
+    {
+        Health += healthadd;
+        healthtext.text = "Health: " + Health.ToString();
+        HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
+    }
+
     public void AddCoin(int coinsgained)
     {
         coins += coinsgained;
@@ -157,11 +92,12 @@ public class UIManagement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-       // EnergyBar.GetComponent<Scrollbar>().size = Energy * 0.01f;
+        EnergyBar.GetComponent<Scrollbar>().size = Energy * 0.01f;
         if (Energy < 100)
         {
             Energy = Energy + 0.2f;
         }
+        
     }
 
     void OpenMenu()
