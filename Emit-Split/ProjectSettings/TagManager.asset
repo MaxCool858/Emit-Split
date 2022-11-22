@@ -3,7 +3,34 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Fist
+  - Hurty
+  - Key_Blue
+  - Door_Blue
+  - Key_Green
+  - Key_Red
+  - Door_Green
+  - Door_Red
+  - Enemy_3
+  - CamTarget
+  - Bullet
+  - Sphere
+  - Diggable
+  - Door
+  - Lever
+  - Coin
+  - Teleporter_1
+  - Teleporter_2
+  - Boss
+  - Acid
+  - Exploder_Red
+  - Exploder_Blue
+  - Exploder_Green
+  - CP
+  - Death
+  - Ring
   layers:
   - Default
   - TransparentFX
@@ -11,8 +38,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - ground
+  - Wall
   - 
   - 
   - 
