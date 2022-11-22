@@ -3,27 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - hidden
-  - vent
-  - light
-  - charger
-  - player
-  - heavy
-  - Fist
-  - Hurty
-  - Enemy_3
-  - Sphere
-  - Bullet
-  - Enemy
-  - Diggable
-  - Door_Green
-  - Door_Blue
-  - Key_Blue
-  - Door_Red
-  - Key_Green
-  - Key_Red
-  - Portal1
+  tags: []
   layers:
   - Default
   - TransparentFX
