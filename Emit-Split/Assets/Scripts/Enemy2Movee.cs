@@ -349,6 +349,11 @@ public class Enemy2Movee : MonoBehaviour
             OriginController.GetComponent<UIManagement>().AddCoin(1);
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.tag == "HealthPack")
+        {
+            OriginController.GetComponent<UIManagement>().GainHealth(1);
+            Destroy(collision.gameObject);
+        }
     }
 
 

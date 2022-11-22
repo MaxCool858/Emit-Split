@@ -22,6 +22,8 @@ public class BlockRemover : MonoBehaviour
     public GameObject P4;
     public GameObject P5;
     public GameObject P6;
+    public GameObject P7;
+    public GameObject P8;
 
 
 
@@ -53,9 +55,9 @@ public class BlockRemover : MonoBehaviour
 
 
         Sphere =  Instantiate(SpherePrefab, P1.transform.position, P1.transform.rotation);
-        BlueBlock = Instantiate(BluePrefab, P2.transform.position, P2.transform.rotation);
+        BlueBlock = Instantiate(BluePrefab, P4.transform.position, P4.transform.rotation);
         RedBlock = Instantiate(RedPrefab, P3.transform.position, P3.transform.rotation);
-        OrangeBlock = Instantiate(OrangePrefab, P4.transform.position, P4.transform.rotation);
+        OrangeBlock = Instantiate(OrangePrefab, P2.transform.position, P2.transform.rotation);
 
         
 

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3314298677901433150}
   - component: {fileID: 3314298677901433151}
   - component: {fileID: 3314298677901433088}
-  m_Layer: 0
+  - component: {fileID: -4092219913598984250}
+  m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3314298677901433089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.28, y: 7.82, z: 21.23}
-  m_LocalScale: {x: 1.732147, y: 0.25755, z: 1.7648052}
+  m_LocalScale: {x: 3.947736, y: 0.25755, z: 3.6261451}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,3 +96,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4092219913598984250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3314298677901433089}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc56912bf547c4d4ba04409f395f9ea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  verticalSpeed: 0.005
+  amplitude: 0.005
+  tempPosition: {x: 0, y: 0, z: 0}

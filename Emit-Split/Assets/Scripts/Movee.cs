@@ -22,6 +22,10 @@ public class Movee : MonoBehaviour
 
     public Transform cam;
 
+    public Camera MainCam;
+
+    LineRenderer SplitterBeam;
+
     public GameObject CameraTarget;
 
     GameObject OriginPlayer; //always set to player's model
@@ -73,14 +77,16 @@ public class Movee : MonoBehaviour
 
 
         cam = GameObject.Find("Main Camera").GetComponent<Transform>();
-
+        MainCam = Camera.main;
         CameraTarget = GameObject.Find("Camera Target");
+        
 
         //general Player Set-Up
         player = GameObject.Find("Playber"); //sets the player object to an object in the scene with name "Playber"
         shootpoint = GameObject.Find("shootpoint").transform; //finds the shootpoint on the player.
         InputMaps = player.GetComponent<PlayerInput>();
-        
+        SplitterBeam = player.GetComponent<LineRenderer>();
+
         OriginPlayer = player;
         OriginController = playercontrol;
         //Fist = GameObject.Find("Fist");
@@ -111,17 +117,21 @@ public class Movee : MonoBehaviour
     void FireSplitter() //detects a left click and will fire raycast. switch the player into the enemy if it detects one.
     {
         OriginPlayer.GetComponent<UIManagement>().LoseEnergy(0);
-        Ray ray = new Ray(shootpoint.position, transform.forward); //shoots ray out of shootpoint transform.
+        //Ray ray = new Ray(shootpoint.position, transform.forward); //shoots ray out of shootpoint transform.
+        Ray ray = MainCam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
+        SplitterBeam.enabled = true;
+        SplitterBeam.SetPosition(0, shootpoint.position);
+        SplitterBeam.SetPosition(1, hit.point);
         Debug.DrawRay(ray.origin, ray.direction * 10);
         //Debug.Log(hit.point);
-        Debug.Log(hit.collider);
-        if (hit.collider != null &&  hit.collider.gameObject.tag == "Hurty")
+        //Debug.Log(hit.collider);
+        if (hit.collider != null && hit.collider.gameObject.tag == "Hurty")
         {
-            Debug.Log("EnemyDetected");
             SwapTo(hit); //if you hit an enemy (tagged as Hurty) switch to that enemy
         }
+
     }
 
     private void SwapTo(RaycastHit hit) //swaps you to the enemy you hit with splitter
@@ -132,7 +142,7 @@ public class Movee : MonoBehaviour
         //playercontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;  //sets enemy character controller to the player controller.
         playercontrol.enabled = true; //activates the enemy controller (now called playercontrol)
         int EnemyType = hit.collider.GetComponent<EnemyClass>().EnemyTypeNum;
-        Debug.Log("EnemySwapping");
+
         if (EnemyType == 2)
         {
             OriginPlayer.GetComponent<UIManagement>().Enemy2Tutorial();
@@ -141,12 +151,10 @@ public class Movee : MonoBehaviour
             Transform tempgroundcheck = hit.collider.gameObject.GetComponent<EnemyClass>().groundcheck;
             tempenemycontrol.enabled = true;
             playercontrol.enabled = false;
-            
             CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;
             CameraTarget.GetComponent<CameraFollow>().p2 = tempenemy.transform;
             CameraTarget.GetComponent<CameraFollow>().Transition();
             CameraTarget.GetComponent<CameraFollow>().player = tempenemy;
-            
             this.GetComponent<Enemy2Movee>().enabled = true;
             this.GetComponent<Enemy2Movee>().player = tempenemy;
             this.GetComponent<Enemy2Movee>().playercontrol = tempenemycontrol;
@@ -156,40 +164,16 @@ public class Movee : MonoBehaviour
 
         if (EnemyType == 99)
         {
-            //OriginPlayer.GetComponent<UIManagement>().Enemy3Tutorial();
+            OriginPlayer.GetComponent<UIManagement>().Enemy3Tutorial();
             GameObject tempenemy = hit.collider.gameObject;
             CharacterController tempenemycontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;
             Transform tempgroundcheck = hit.collider.gameObject.GetComponent<EnemyClass>().groundcheck;
             tempenemycontrol.enabled = true;
             playercontrol.enabled = false;
-
-           CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;
-            CameraTarget.GetComponent<CameraFollow>().p2 = tempenemy.transform;
-            CameraTarget.GetComponent<CameraFollow>().Transition();
-            CameraTarget.GetComponent<CameraFollow>().player = tempenemy;
-
-            this.GetComponent<Enemy3Movee>().enabled = true;
-            this.GetComponent<Enemy3Movee>().player = tempenemy;
-            this.GetComponent<Enemy3Movee>().playercontrol = tempenemycontrol;
-            this.GetComponent<Enemy3Movee>().groundCheck = tempgroundcheck;
-            this.GetComponent<Movee>().enabled = false;
-        }
-
-
-        if (EnemyType == 3)
-        {
-            //OriginPlayer.GetComponent<UIManagement>().Enemy3Tutorial();
-            GameObject tempenemy = hit.collider.gameObject;
-            CharacterController tempenemycontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;
-            Transform tempgroundcheck = hit.collider.gameObject.GetComponent<EnemyClass>().groundcheck;
-            tempenemycontrol.enabled = true;
-            playercontrol.enabled = false;
-
             CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;
             CameraTarget.GetComponent<CameraFollow>().p2 = tempenemy.transform;
             CameraTarget.GetComponent<CameraFollow>().Transition();
             CameraTarget.GetComponent<CameraFollow>().player = tempenemy;
-
             this.GetComponent<Enemy3Movee>().enabled = true;
             this.GetComponent<Enemy3Movee>().player = tempenemy;
             this.GetComponent<Enemy3Movee>().playercontrol = tempenemycontrol;
@@ -394,6 +378,11 @@ public class Movee : MonoBehaviour
         if (collision.gameObject.tag == "Coin")
         {
             OriginController.GetComponent<UIManagement>().AddCoin(1);
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "HealthPack")
+        {
+            OriginController.GetComponent<UIManagement>().GainHealth(1);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "Door")

@@ -73,6 +73,14 @@ public class UIManagement : MonoBehaviour
         Health -= healthsubtract;
         healthtext.text = "Health: " + Health.ToString();
         HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
+        if (Health <= 0) ResetGame();
+    }
+
+    public void GainHealth(int healthadd)
+    {
+        Health += healthadd;
+        healthtext.text = "Health: " + Health.ToString();
+        HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
     }
 
     public void AddCoin(int coinsgained)

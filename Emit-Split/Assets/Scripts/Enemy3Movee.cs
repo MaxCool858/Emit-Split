@@ -356,6 +356,11 @@ public class Enemy3Movee : MonoBehaviour
             OriginController.GetComponent<UIManagement>().AddCoin(1);
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.tag == "HealthPack")
+        {
+            Destroy(collision.gameObject);
+            OriginController.GetComponent<UIManagement>().GainHealth(1);
+        }
     }
 
 
