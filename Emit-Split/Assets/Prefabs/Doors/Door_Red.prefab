@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7554025093105621065
+--- !u!1 &4873517361502949929
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,54 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7554025093105621066}
-  - component: {fileID: 7554025093105621067}
-  m_Layer: 0
-  m_Name: Door Collider
-  m_TagString: Door_Red
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7554025093105621066
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7554025093105621065}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.31145805, y: 0.24033242, z: 3.750888}
-  m_Children: []
-  m_Father: {fileID: 7554025094214599509}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7554025093105621067
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7554025093105621065}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.1678762, y: 3.691227, z: 1}
-  m_Center: {x: 0.01594019, y: 0.2254734, z: 0}
---- !u!1 &7554025094214599529
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7554025094214599509}
-  - component: {fileID: 7554025094214599508}
-  - component: {fileID: 7554025094214599531}
-  - component: {fileID: 7554025094214599530}
+  - component: {fileID: 4873517361502949933}
+  - component: {fileID: 4873517361502949932}
+  - component: {fileID: 4873517361502949931}
+  - component: {fileID: 4873517361502949930}
   m_Layer: 0
   m_Name: Door_Red
   m_TagString: Door_Red
@@ -63,36 +19,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7554025094214599509
+--- !u!4 &4873517361502949933
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7554025094214599529}
+  m_GameObject: {fileID: 4873517361502949929}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 36, z: 614}
+  m_LocalPosition: {x: -6, y: 36, z: 159.96933}
   m_LocalScale: {x: 3.2107053, y: 4.1609035, z: 0.26660353}
   m_Children:
-  - {fileID: 7554025093105621066}
+  - {fileID: 4873517362077255019}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7554025094214599508
+--- !u!33 &4873517361502949932
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7554025094214599529}
+  m_GameObject: {fileID: 4873517361502949929}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7554025094214599531
+--- !u!23 &4873517361502949931
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7554025094214599529}
+  m_GameObject: {fileID: 4873517361502949929}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -105,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 56c60c9b36537ae41be5f6c4776f84d5, type: 2}
+  - {fileID: 2100000, guid: 70cb6a9b51108f54a8f79f94ab1221fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,16 +83,60 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7554025094214599530
+--- !u!65 &4873517361502949930
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7554025094214599529}
+  m_GameObject: {fileID: 4873517361502949929}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4873517362077255018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4873517362077255019}
+  - component: {fileID: 4873517362077255020}
+  m_Layer: 0
+  m_Name: Door Collider
+  m_TagString: Door_Red
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4873517362077255019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873517362077255018}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.31145805, y: 0.24033242, z: 3.750888}
+  m_Children: []
+  m_Father: {fileID: 4873517361502949933}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4873517362077255020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873517362077255018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.1678762, y: 3.691227, z: 1}
+  m_Center: {x: 0.01594019, y: 0.2254734, z: 0}
