@@ -8,7 +8,7 @@ public class UIManagement : MonoBehaviour
 {
 
     GameObject player;
-    int Health = 10;
+    public int Health = 10;
     public float Energy = 100;
     public float coins;
     public Text healthtext;

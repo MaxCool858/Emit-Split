@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 7676977721599395407}
   - component: {fileID: 7676977721599395406}
   - component: {fileID: 7676977721599395405}
-  - component: {fileID: 7676977721599395404}
   m_Layer: 0
   m_Name: CheckPoint Ball
-  m_TagString: Untagged
+  m_TagString: CP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,15 +95,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7676977721599395404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7676977721599395402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68038665c1ee8c746a25c3a60608c2f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
