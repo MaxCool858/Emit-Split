@@ -45,6 +45,18 @@ public class Respawn : MonoBehaviour
 
         }
 
+        if(other.tag == "Ring")
+        {
+            script.Health -= 1;
+        }
+
+        if(other.tag == "Exploder_Blue")
+        {
+            script.Health -= 1;
+            Debug.Log("HEALTH" + script.Health);
+
+        }
+
     }
 
 

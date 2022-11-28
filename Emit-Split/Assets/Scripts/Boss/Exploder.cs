@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class Exploder : MonoBehaviour
 {
-    public float timeValue = 10;
+    public float timeValue = 2;
 
     Collider m_Collider;
+
+
+    //Ring Spawn
+    public GameObject Ring;
+    public GameObject RingSpawner;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,22 +27,23 @@ public class Exploder : MonoBehaviour
         if (timeValue > 0)
         {
             timeValue -= Time.deltaTime;
-            //Debug.Log("Time is: " + timeValue);
+            Debug.Log("Time is: " + timeValue);
         }
         else
         {
-            Explode();
-            timeValue += 10;
+            StartCoroutine(Explode());
 
         }
 
+
+      
 
 
         void OnTriggerEnter(Collider other)
         {
             if (other.tag == "Player")
             {
-                Explode();
+                StartCoroutine(Explode());
                // Destroy(other.gameObject);
             }
 
@@ -55,21 +63,20 @@ public class Exploder : MonoBehaviour
         }
 
 
-        void Explode()
+        IEnumerator Explode()
         {
-            Emission();
-            
+            this.GetComponent<EnemyFollow>().enabled = false;
+
+            this.GetComponent<MeshRenderer>().enabled = false;
+
+            Instantiate(Ring, RingSpawner.transform.position, RingSpawner.transform.rotation);
+
+            yield return new WaitForSeconds(.75f);
+
             Destroy(this.gameObject);
 
         }
-        void Emission()
-        {
-            GetComponent<ParticleSystem>().Play();
-            ParticleSystem.EmissionModule em = GetComponent<ParticleSystem>().emission;
-            em.enabled = true;
-
-        }
-
+      
 
 
     }
