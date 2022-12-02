@@ -5,6 +5,9 @@ using UnityEngine;
 public class ShootAtPlayer : MonoBehaviour
 {
 
+    //public Transform playerTransform;
+    public Vector3 position;
+    public GameObject PlayerLoc;
 
     public GameObject Bullet_Emitter;
 
@@ -12,89 +15,82 @@ public class ShootAtPlayer : MonoBehaviour
 
     public float ForceAmount = 10.0f;
 
-
+    
     public bool inRange ;
 
 
     public bool CanShoot;
 
-    
 
-    
+    public float timeValue = 2;
+
+
+    //shoots at player every X amount of seconds
     private void OnTriggerEnter(Collider other)
     {
 
         if (other.tag == "Player")
         {
             inRange = true;
-            CanShoot = true;
+            InvokeRepeating("Shoot", 0.2f, 0.6f);
+
         }
     }
+
+    //top shooting if not in range
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
             inRange = false;
-            CanShoot = false;
+            CancelInvoke();
         }
 
 
     }
 
-    // checks if player is in range, if so, then it shoots
+    // constantly updates players location
 
     void Update()
     {
-      
+
+        PlayerLoc = GameObject.FindGameObjectWithTag("Player");
 
 
+        position = PlayerLoc.transform.position;
 
-        if (CanShoot == true && inRange == true)
-        {
-            
-             ShootPlayer();
-            CanShoot = false;
-            StartCoroutine(Reload());
-            
-        }   
+        this.transform.LookAt(position);
 
 
-        
     }
 
 
-    //shoots player 
-     private void ShootPlayer()
+
+    //Spawns bullet at player
+    private void Shoot()
     {
 
-        
-
-            GameObject Temporary_Buller_Handler;
+        GameObject Temporary_Buller_Handler;
 
 
-            Temporary_Buller_Handler = Instantiate(Bullet, Bullet_Emitter.transform.position, Bullet_Emitter.transform.rotation);
-
-            Temporary_Buller_Handler.transform.Rotate(Vector3.left * 90);
+        Temporary_Buller_Handler = Instantiate(Bullet, Bullet_Emitter.transform.position, Bullet_Emitter.transform.rotation);
 
 
-            Rigidbody Temporary_RigidBody;
-            Temporary_RigidBody = Temporary_Buller_Handler.GetComponent<Rigidbody>();
+        Temporary_Buller_Handler.transform.Rotate(Vector3.left * 90);
 
 
-            Temporary_RigidBody.AddForce(transform.forward * ForceAmount);
 
-            Destroy(Temporary_Buller_Handler, 10.0f);
+        Rigidbody Temporary_RigidBody;
+        Temporary_RigidBody = Temporary_Buller_Handler.GetComponent<Rigidbody>();
 
-            
-      
+
+        Temporary_RigidBody.AddForce(transform.forward * ForceAmount);
+
+        Destroy(Temporary_Buller_Handler, 10.0f);
+        //    CanShoot = true;
     }
 
-    //delay after every shot
-    IEnumerator Reload()
-    {
-        yield return new WaitForSeconds(3);
-        CanShoot = true;
-    }
+
 
 
 
