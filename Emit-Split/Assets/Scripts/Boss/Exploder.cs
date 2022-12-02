@@ -27,7 +27,6 @@ public class Exploder : MonoBehaviour
         if (timeValue > 0)
         {
             timeValue -= Time.deltaTime;
-            Debug.Log("Time is: " + timeValue);
         }
         else
         {
