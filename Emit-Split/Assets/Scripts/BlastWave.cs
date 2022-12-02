@@ -21,4 +21,12 @@ public class BlastWave : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(null))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
