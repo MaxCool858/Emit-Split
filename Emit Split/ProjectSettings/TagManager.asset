@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Coin
+  - Bullet
+  - Door
+  - Fist
+  - Lever
+  - Diggable
+  - Hurty
+  - HealthPack
+  - Portal1
+  - charger
+  - hidden
+  - heavy
+  - light
+  - Ring
+  - Death
+  - Exploder_Red
+  - Exploder_Blue
+  - Key_Green
+  - Teleporter_2
+  - Exploder_Green
+  - Door_Red
+  - Key_Red
+  - Door_Green
+  - Key_Blue
+  - CP
+  - Sphere
+  - Door_Blue
+  - Enemy_3
+  - Enemy
+  - Teleporter_1
+  - Boss
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Environment
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
