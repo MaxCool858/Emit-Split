@@ -59,6 +59,16 @@ public class UIManagement : MonoBehaviour
             healthtext.text = "Health: " + Health.ToString();
             HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
         }
+
+        if (other.tag == "Bullet")
+        {
+            Health = Health - 1;
+            healthtext.text = "Health: " + Health.ToString();
+            HealthBar.GetComponent<Scrollbar>().size = Health * 0.1f;
+        }
+
+
+
     }
 
     public void LoseEnergy(int energysubtract)
