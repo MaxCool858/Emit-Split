@@ -10,16 +10,16 @@ public class CameraRotate : MonoBehaviour
     void Start()
     {
 
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     //takes positions of x and y of camera and rotates
     void Update()
     {
-        turn.x += Input.GetAxis("Mouse X");
+        //turn.x += Input.GetAxis("Mouse X");
 
-        turn.y += Input.GetAxis("Mouse Y");
+        //turn.y += Input.GetAxis("Mouse Y");
 
-        transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
+        //transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
     }
 }

@@ -67,7 +67,7 @@ public class ShootASPlayer : MonoBehaviour
     {
         playerInput = new NotStupid(); //creates a unique ControlScheme for this script
 
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
 
         playercontrol = GetComponent<CharacterController>(); //Sets player control to this script's character controller
         //playerInput.CharacterMove.Move.started += onMoveInput; //if the player is pressing WASD move them using onMoveInput

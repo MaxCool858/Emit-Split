@@ -324,6 +324,7 @@ public class Enemy3Movee : MonoBehaviour
     {
         OriginPlayer.GetComponent<UIManagement>().HideTutorial();
         playercontrol.enabled = false;
+        OriginPlayer.tag = "Player";
         player.tag = "Hurty";
         OriginController.enabled = true;
         CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;

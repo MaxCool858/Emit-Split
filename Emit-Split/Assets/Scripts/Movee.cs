@@ -136,6 +136,7 @@ public class Movee : MonoBehaviour
 
     private void SwapTo(RaycastHit hit) //swaps you to the enemy you hit with splitter
     {
+        this.gameObject.tag = "Untagged";
         hit.collider.gameObject.tag = "Player"; //sets enemy tag to player
         player = hit.collider.gameObject; //sets player object to enemy
         playercontrol.enabled = false; //disables the current control scheme
@@ -163,6 +164,24 @@ public class Movee : MonoBehaviour
         }
 
         if (EnemyType == 99)
+        {
+            OriginPlayer.GetComponent<UIManagement>().Enemy3Tutorial();
+            GameObject tempenemy = hit.collider.gameObject;
+            CharacterController tempenemycontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;
+            Transform tempgroundcheck = hit.collider.gameObject.GetComponent<EnemyClass>().groundcheck;
+            tempenemycontrol.enabled = true;
+            playercontrol.enabled = false;
+            CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;
+            CameraTarget.GetComponent<CameraFollow>().p2 = tempenemy.transform;
+            CameraTarget.GetComponent<CameraFollow>().Transition();
+            CameraTarget.GetComponent<CameraFollow>().player = tempenemy;
+            this.GetComponent<Enemy3Movee>().enabled = true;
+            this.GetComponent<Enemy3Movee>().player = tempenemy;
+            this.GetComponent<Enemy3Movee>().playercontrol = tempenemycontrol;
+            this.GetComponent<Enemy3Movee>().groundCheck = tempgroundcheck;
+            this.GetComponent<Movee>().enabled = false;
+        }
+        if (EnemyType == 33)
         {
             OriginPlayer.GetComponent<UIManagement>().Enemy3Tutorial();
             GameObject tempenemy = hit.collider.gameObject;
