@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     public GameObject blastWave;
-    public GameObject player;
+    public GameObject playerWeapon;
 
     private void Start()
     {
@@ -14,16 +14,21 @@ public class Shooting : MonoBehaviour
 
     private void Shot()
     {
-        Instantiate(blastWave);
+        Instantiate(blastWave, this.transform.position, this.transform.rotation);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.collider.gameObject == player)
+        if(other.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
+            if (playerWeapon.activeSelf)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Debug.Log("You Died");
+            }           
         }
     }
-
-
 }

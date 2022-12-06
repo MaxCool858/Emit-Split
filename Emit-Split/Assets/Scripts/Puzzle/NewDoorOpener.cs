@@ -10,6 +10,8 @@ using UnityEngine;
 //GameObject must have "Player" tag in order for it to activate the button
 public class NewDoorOpener : MonoBehaviour
 {
+    public static NewDoorOpener Instance;
+
     public GameObject door;
     public GameObject button;
 
@@ -27,8 +29,14 @@ public class NewDoorOpener : MonoBehaviour
     private bool doorOpen;
     private bool doorClosing;
     private bool doorClosed;
+    public bool doorOverride;
 
     private float speed = 5f;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Sets position of open and close on start
     void Start()
@@ -42,6 +50,11 @@ public class NewDoorOpener : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (doorOverride)
+        {
+            doorOpening = true;
+            doorClosing = false;
+        }
         DoorStatus();
     }
 

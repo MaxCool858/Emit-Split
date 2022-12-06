@@ -12,7 +12,7 @@ public class Battery : MonoBehaviour
 
     public bool lightOn;
     public bool batteryDead;
-
+    private bool batteryFull;
     private void Awake()
     {
         batteryLevel = maxCharge;    
@@ -32,10 +32,11 @@ public class Battery : MonoBehaviour
             batteryDead = false;
         }
 
-        if(batteryLevel >= maxCharge)
+        if(batteryLevel >= maxCharge && !batteryFull)
         {
             batteryLevel = maxCharge;
             print("Battery Full");
+            batteryFull = true;
         }
 
         if(batteryLevel == maxCharge / 4)
