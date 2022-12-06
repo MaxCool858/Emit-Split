@@ -24,6 +24,11 @@ TagManager:
   - Key_Green
   - Key_Red
   - Portal1
+  - Door
+  - Lever
+  - HealthPack
+  - Coin
+  - Death
   layers:
   - Default
   - TransparentFX
@@ -31,7 +36,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Environment
   - 
   - 
   - 
