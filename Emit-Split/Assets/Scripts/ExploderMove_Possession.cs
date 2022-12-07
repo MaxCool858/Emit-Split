@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Enemy3Movee : MonoBehaviour
+public class ExploderMove_Possession : MonoBehaviour
 {
     NotStupid playerInput;
     Vector2 CurrentInput;//recieves player inputs
@@ -54,12 +54,13 @@ public class Enemy3Movee : MonoBehaviour
     public LayerMask groundMask;
     public bool isGrounded;
 
+    public bool BlueTrue;
 
     private void Awake()
     {
         playerInput = new NotStupid(); //creates a unique ControlScheme for this script
 
-
+        BlueTrue = true;
         playercontrol = GetComponent<CharacterController>(); //Sets player control to this script's character controller
         //playerInput.CharacterMove.Move.started += onMoveInput; //if the player is pressing WASD move them using onMoveInput
         //playerInput.CharacterMove.Move.canceled += onMoveInput; //same
@@ -93,7 +94,8 @@ public class Enemy3Movee : MonoBehaviour
 
     void FireWeapon() //activates the fist for a moment
     {
-
+        Debug.Log("HI SHOOTIN");
+        OriginReturn();
     }
 
     IEnumerator HitDelay() //Sets the fist to false again after the attack
@@ -102,45 +104,7 @@ public class Enemy3Movee : MonoBehaviour
 
     }
 
-    void FireSplitter() //detects a left click and will fire raycast. switch the player into the enemy if it detects one.
-    {
-        OriginPlayer.GetComponent<UIManagement>().LoseEnergy(0);
-        Ray ray = new Ray(shootpoint.position, transform.forward); //shoots ray out of shootpoint transform.
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
-        Debug.DrawRay(ray.origin, ray.direction * 10);
-        //Debug.Log(hit.point);
-        //Debug.Log(hit.collider);
-        if (hit.collider != null && hit.collider.gameObject.tag == "Hurty")
-        {
-            SwapTo(hit); //if you hit an enemy (tagged as Hurty) switch to that enemy
-        }
-    }
 
-    private void SwapTo(RaycastHit hit) //swaps you to the enemy you hit with splitter
-    {
-        hit.collider.gameObject.tag = "Player"; //sets enemy tag to player
-        player = hit.collider.gameObject; //sets player object to enemy
-        playercontrol.enabled = false; //disables the current control scheme
-        //playercontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;  //sets enemy character controller to the player controller.
-        playercontrol.enabled = true; //activates the enemy controller (now called playercontrol)
-        int EnemyType = hit.collider.GetComponent<EnemyClass>().EnemyTypeNum;
-
-        if (EnemyType == 2)
-        {
-            GameObject tempenemy = hit.collider.gameObject;
-            CharacterController tempenemycontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;
-            tempenemycontrol.enabled = true;
-            playercontrol.enabled = false;
-            CameraTarget.GetComponent<CameraFollow>().player = tempenemy;
-            this.GetComponent<Enemy2Movee>().enabled = true;
-            this.GetComponent<Enemy2Movee>().player = tempenemy;
-            this.GetComponent<Enemy2Movee>().playercontrol = tempenemycontrol;
-            this.GetComponent<Movee>().enabled = false;
-        }
-
-
-    }
 
     void onMoveInput() //if the player presses WASD detect which keys they are pressing and set that to the input.
     {
@@ -301,31 +265,15 @@ public class Enemy3Movee : MonoBehaviour
 
         playercontrol.Move(velocity);
 
-        if (isDrilling)
-        {
-            player.GetComponent<MeshRenderer>().enabled = false;
-            GameObject hat = player.GetComponent<TargetDummy>().Hat;
-            hat.transform.localPosition = new Vector3(0, -1.75f, 0);
-            player.GetComponent<TargetDummy>().dirtparticles.SetActive(true);
-            player.GetComponent<TargetDummy>().digbox.SetActive(true);
-        }
-        if (!isDrilling)
-        {
-            player.GetComponent<MeshRenderer>().enabled = true;
-            GameObject hat = player.GetComponent<TargetDummy>().Hat;
-            hat.transform.localPosition = new Vector3(0, 0, 0);
-            player.GetComponent<TargetDummy>().dirtparticles.SetActive(false);
-            player.GetComponent<TargetDummy>().digbox.SetActive(false);
-        }
-
+      
     }
 
     void OriginReturn()
     {
-        OriginPlayer.GetComponent<UIManagement>().HideTutorial();
+     //   OriginPlayer.GetComponent<UIManagement>().HideTutorial();
         playercontrol.enabled = false;
         OriginPlayer.tag = "Player";
-        player.tag = "Hurty";
+        player.tag = "Exploder_Blue";
         OriginController.enabled = true;
         CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;
         CameraTarget.GetComponent<CameraFollow>().p2 = OriginPlayer.transform;
@@ -334,8 +282,9 @@ public class Enemy3Movee : MonoBehaviour
         this.GetComponent<Movee>().enabled = true;
         this.GetComponent<Movee>().player = OriginPlayer;
         this.GetComponent<Movee>().playercontrol = OriginController;
-
-        this.GetComponent<Enemy3Movee>().enabled = false;
+        playercontrol.GetComponent<Exploder>().enabled = true;
+        this.GetComponent<ExploderMove_Possession>().enabled = false;
+        BlueTrue = false;
     }
 
     void OnEnable()//Activates player controls when you call this function
@@ -362,6 +311,14 @@ public class Enemy3Movee : MonoBehaviour
             Destroy(collision.gameObject);
             OriginController.GetComponent<UIManagement>().GainHealth(1);
         }
+
+        if(collision.gameObject.tag == "Boss")
+        {
+            OriginReturn();
+        }
+
+
+
     }
 
 

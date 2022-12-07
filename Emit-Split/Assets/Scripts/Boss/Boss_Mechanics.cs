@@ -9,6 +9,7 @@ public class Boss_Mechanics : MonoBehaviour
     private bool RedOn = true;
     private bool GreenOn = false;
 
+    
 
     //Spawn Enemies
     public GameObject exploder_red;
@@ -44,6 +45,17 @@ public class Boss_Mechanics : MonoBehaviour
     //render
     public Renderer rend;
 
+
+    //colorchecker
+    public bool Exploder_Blue = false;
+    public bool Exploder_Red = false;
+    public bool Exploder_Green = false;
+
+
+    ExploderMove_Possession explodermove_possession;
+
+
+
     void Start()
     {
         ChangeColor();
@@ -71,8 +83,16 @@ public class Boss_Mechanics : MonoBehaviour
                 RingSpawn();
             }
 
-        
+        Debug.Log("Blue on " + explodermove_possession.BlueTrue);
+
+
+
+        explodermove_possession = GameObject.Find("Player").GetComponent<ExploderMove_Possession>();    
     
+ 
+           
+            
+            
         }
 
 
@@ -248,37 +268,46 @@ public class Boss_Mechanics : MonoBehaviour
 
         void OnTriggerEnter(Collider other)
         {
-            /*
-            if(other.tag == "Exploder_Red" && RedOn)
+           
+            //delete below-
+
+            if (other.tag == "Player")
             {
-                Damage();
+            Debug.Log("Blue on ");
+              Damage();
+                   
+
             }
-            else if(other.tag == "Exploder_Blue" && BlueOn)
+
+            else if (other.tag == "Player" && RedOn)
             {
-                Damage();
-            }
-            else if(other.tag == "Exploder_Green" && GreenOn)
-            {
-                Damage();
-            }
-            */
-            //delete below- ONLY FOR TESTING- NEED POSSESION
-            if (other.tag == "Player" && RedOn)
-            {
-                Damage();
-            }
-            else if (other.tag == "Player" && BlueOn)
-            {
-                Damage();
+
+            Debug.Log("NEED FIX");
+                //Damage();
             }
             else if (other.tag == "Player" && GreenOn)
             {
-                Damage();
-            }
-        }
+
+            Debug.Log("NEED FIX");
+
+          //  Damage();
+              }
 
 
-        void Damage()
+        
+
+    }
+
+
+    void CheckColor()
+    {
+
+     //   ExploderMove_Possession exploderMove_Possession = Current_Possession.GetComponent<ExploderMove_Possession>();
+
+      //  bool thisBlueTrue = BlueTrue;
+    }
+
+    void Damage()
         {
             if (Phase1)
             {

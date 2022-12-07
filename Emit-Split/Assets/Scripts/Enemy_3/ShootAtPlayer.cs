@@ -40,7 +40,7 @@ public class ShootAtPlayer : MonoBehaviour
     //top shooting if not in range
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" || other.tag == "Untagged") 
         {
             inRange = false;
             CancelInvoke();
