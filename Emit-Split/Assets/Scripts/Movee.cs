@@ -127,7 +127,7 @@ public class Movee : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * 10);
         //Debug.Log(hit.point);
         //Debug.Log(hit.collider);
-        if (hit.collider != null && hit.collider.gameObject.tag == "Hurty")
+        if (hit.collider != null && hit.collider.gameObject.tag == "Hurty" || hit.collider.gameObject.tag == "Exploder_Blue")
         {
             SwapTo(hit); //if you hit an enemy (tagged as Hurty) switch to that enemy
         }
@@ -182,7 +182,61 @@ public class Movee : MonoBehaviour
             this.GetComponent<Movee>().enabled = false;
         }
         if (EnemyType == 33)
+        {           
+         //   OriginPlayer.GetComponent<UIManagement>().Enemy3Tutorial();
+            GameObject tempenemy = hit.collider.gameObject;
+            CharacterController tempenemycontrol = hit.collider.gameObject.GetComponent<enemyType_Exploder_Blue>().enemycontrol;
+            Transform tempgroundcheck = hit.collider.gameObject.GetComponent<EnemyClass>().groundcheck;
+            tempenemycontrol.enabled = true;
+            playercontrol.enabled = false;
+            tempenemy.GetComponent<Exploder>().enabled = false;
+            CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;
+            CameraTarget.GetComponent<CameraFollow>().p2 = tempenemy.transform;
+            CameraTarget.GetComponent<CameraFollow>().Transition();
+            CameraTarget.GetComponent<CameraFollow>().player = tempenemy;
+            this.GetComponent<ExploderMove_Possession>().enabled = true;
+            this.GetComponent<ExploderMove_Possession>().player = tempenemy;
+            this.GetComponent<ExploderMove_Possession>().playercontrol = tempenemycontrol;
+            this.GetComponent<ExploderMove_Possession>().groundCheck = tempgroundcheck;
+            this.GetComponent<Movee>().enabled = false;
+                   
+
+        }
+        
+        if (EnemyType == 55)
         {
+
+            //   OriginPlayer.GetComponent<UIManagement>().Enemy3Tutorial();
+            GameObject tempenemy = hit.collider.gameObject;
+            CharacterController tempenemycontrol = hit.collider.gameObject.GetComponent<enemyType_Exploder_Blue>().enemycontrol;
+            Transform tempgroundcheck = hit.collider.gameObject.GetComponent<EnemyClass>().groundcheck;
+            tempenemycontrol.enabled = true;
+            playercontrol.enabled = false;
+
+            Debug.Log("");
+
+            tempenemy.GetComponent<ShootAtPlayer>().enabled = false;
+
+
+            CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;
+            CameraTarget.GetComponent<CameraFollow>().p2 = tempenemy.transform;
+            CameraTarget.GetComponent<CameraFollow>().Transition();
+            CameraTarget.GetComponent<CameraFollow>().player = tempenemy;
+
+            this.GetComponent<Shooting_Possession>().enabled = true;
+            this.GetComponent<Shooting_Possession>().player = tempenemy;
+            this.GetComponent<Shooting_Possession>().playercontrol = tempenemycontrol;
+            this.GetComponent<Shooting_Possession>().groundCheck = tempgroundcheck;
+            this.GetComponent<Movee>().enabled = false;
+
+
+        }
+
+    
+        if (EnemyType == 3)
+        {
+          
+
             OriginPlayer.GetComponent<UIManagement>().Enemy3Tutorial();
             GameObject tempenemy = hit.collider.gameObject;
             CharacterController tempenemycontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;
@@ -198,8 +252,9 @@ public class Movee : MonoBehaviour
             this.GetComponent<Enemy3Movee>().playercontrol = tempenemycontrol;
             this.GetComponent<Enemy3Movee>().groundCheck = tempgroundcheck;
             this.GetComponent<Movee>().enabled = false;
-        }
 
+        }
+       
 
     }
 

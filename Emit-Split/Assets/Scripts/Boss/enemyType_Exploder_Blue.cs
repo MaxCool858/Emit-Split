@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class enemyType_Exploder_Blue : EnemyClass
 {
-    public GameObject dirtparticles;
-    public GameObject Hat;
-    public GameObject digbox;
+   
     // Start is called before the first frame update
     void Start()
     {
