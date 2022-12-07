@@ -5,7 +5,7 @@ using UnityEngine;
 public class Switch : MonoBehaviour
 {   
     //the speed that the platform moves
-    private float speed = 5f;
+    private float speed = 2f;
 
     //determine vertical direction
     public bool goingUp;
@@ -66,19 +66,21 @@ public class Switch : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("heavy"))
+        if (other.CompareTag("Player"))
         {
             powerOn = true;
             Debug.Log("switched on");
+            Destroy(Spin.Instance);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("heavy"))
+        if(other.CompareTag("Player"))
         {
-            powerOn = false;
+            //Spin.Instance.speed = 10;
             Debug.Log("switched off");
         }
     }
+   
 }

@@ -31,7 +31,7 @@ public class NewDoorOpener : MonoBehaviour
     private bool doorClosed;
     public bool doorOverride;
 
-    private float speed = 5f;
+    private float speed = 2f;
 
     private void Awake()
     {

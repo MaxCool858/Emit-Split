@@ -5,20 +5,33 @@ using UnityEngine;
 //spins object at assigned speed along selected axis or axes
 public class Spin : MonoBehaviour
 {
+    public static Spin Instance;
     public float speed;
     public bool x;
     public bool y;
     public bool z;
+    public bool spinActive;
 
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        Spinny();
+        spinActive = true;
+    }
+    private void Update()
+    {
+        if (spinActive)
+        {
+            Spinny();
+        }
+    }
+
+    private void Awake()
+    {
+        Instance = this;
     }
 
     private void Spinny()
     {
+
         if (x)
         {
             transform.Rotate(speed * Time.deltaTime, 0, 0);
