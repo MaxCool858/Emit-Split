@@ -24,11 +24,14 @@ TagManager:
   - Key_Green
   - Key_Red
   - Portal1
-  - Door
-  - Lever
-  - HealthPack
-  - Coin
+  - Boss
+  - Exploder_Blue
+  - Ring
+  - Exploder_Red
+  - Exploder_Green
+  - CP
   - Death
+  - Ring_1
   layers:
   - Default
   - TransparentFX
@@ -36,9 +39,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Environment
   - 
   - 
+  - Exploder_Blue
   - 
   - 
   - 
