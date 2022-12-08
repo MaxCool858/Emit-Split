@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.AI;
 
 public class Movee : MonoBehaviour
 {
@@ -181,6 +181,8 @@ public class Movee : MonoBehaviour
             this.GetComponent<Enemy1Movee>().playercontrol = tempenemycontrol;
             this.GetComponent<Enemy1Movee>().groundCheck = tempgroundcheck;
             this.GetComponent<Movee>().enabled = false;
+            tempenemycontrol.GetComponent<EnemyFollow>().enabled = false;
+            tempenemy.GetComponent<NavMeshAgent>().enabled = false;
 
             Debug.Log("3 WAVE");
 

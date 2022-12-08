@@ -12,7 +12,7 @@ public class Boss_Mechanics : MonoBehaviour
 
     public GameObject TriggerByObject;
 
-
+    public GameObject Exit;
 
     //Spawn Enemies
     public GameObject exploder_red;
@@ -318,6 +318,7 @@ public class Boss_Mechanics : MonoBehaviour
             }
             else if (Phase3)
             {
+
                 Death();
             }
         }

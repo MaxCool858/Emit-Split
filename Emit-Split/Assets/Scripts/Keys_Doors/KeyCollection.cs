@@ -12,10 +12,13 @@ public class KeyCollection : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.tag =="Player")
         {
             this.gameObject.SetActive(false);
+            this.GetComponent<MeshRenderer>().enabled = false;
             KeysAndElevator.Instance.keyNum++;
+            Debug.Log("HREER"); 
+
             Debug.Log("Keys: " + KeysAndElevator.Instance.keyNum);
         }
         /*
