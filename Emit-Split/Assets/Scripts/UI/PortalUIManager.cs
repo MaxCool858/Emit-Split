@@ -7,17 +7,13 @@ public class PortalUIManager : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (this.CompareTag("Portal1"))
-        {
-            if (other.gameObject.CompareTag("Player"))
+        
+            if (other.tag == "Player")
             {
+               
                 SceneManager.LoadScene(2);
             }
-        }
-        else
-        {
-            Debug.Log("This portal has an invalid tag");
-        }
+       
         
     }
 }

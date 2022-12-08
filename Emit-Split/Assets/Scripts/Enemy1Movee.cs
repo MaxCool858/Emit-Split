@@ -130,8 +130,8 @@ public class Enemy1Movee : MonoBehaviour
             float targetAngle = Mathf.Atan2(moveVector.x, moveVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             //float targetRunAngle = Mathf.Atan2(runMoveVector.x, runMoveVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
 
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, smoothTurnTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, smoothTurnTime);
+            player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             CurrentMovement = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             //CurrentRunMovement = Quaternion.Euler(0f, targetRunAngle, 0f) * Vector3.forward;
             //playercontrol.Move(moveDir * Time.deltaTime * speed);
@@ -238,7 +238,7 @@ public class Enemy1Movee : MonoBehaviour
     void Update()
     {
 
-        //RotatePlayer();
+       // RotatePlayer();
         //Debug.Log(velocity);
         onMoveInput();
 
@@ -309,6 +309,7 @@ public class Enemy1Movee : MonoBehaviour
         OriginPlayer.GetComponent<UIManagement>().HideTutorial();
         playercontrol.enabled = false;
         player.tag = "heavy";
+        OriginPlayer.tag = "Player";
         OriginController.enabled = true;
         CameraTarget.GetComponent<CameraFollow>().p1 = player.transform;
         CameraTarget.GetComponent<CameraFollow>().p2 = OriginPlayer.transform;
@@ -347,4 +348,8 @@ public class Enemy1Movee : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+
+
+
 }

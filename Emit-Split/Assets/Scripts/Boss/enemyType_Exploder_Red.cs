@@ -11,7 +11,7 @@ public class enemyType_Exploder_Red : EnemyClass
         Health = 10;
         self = this.gameObject;
         enemycontrol = GetComponent<CharacterController>();
-        EnemyTypeNum = 55;
+        EnemyTypeNum = 69;
     }
 
     // Update is called once per frame

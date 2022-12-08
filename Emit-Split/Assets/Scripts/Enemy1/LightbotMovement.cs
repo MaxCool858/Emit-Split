@@ -28,7 +28,7 @@ public class LightbotMovement : MonoBehaviour
     {
   
 
-        Debug.Log(context);
+        //Debug.Log(context);
         botVector = context.ReadValue<Vector2>();
         
     }

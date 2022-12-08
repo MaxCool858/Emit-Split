@@ -524,7 +524,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Main Character:\n\nWASD Move\n\nSpace- Jump\n\nShift-Sprint\n\nLeft Click-
-    Punch\n\nRight Click- Fire Splitter\n\tThis move allows you to possess enemies
+    Punch\n\nRight Click- Possess Enemy\n\tThis move allows you to possess enemies
     and use their abilities.\n\nOnly in this form can you collect coins\n"
 --- !u!1 &3858466418017505941
 GameObject:

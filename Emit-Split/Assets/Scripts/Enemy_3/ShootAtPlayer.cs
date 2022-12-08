@@ -44,6 +44,7 @@ public class ShootAtPlayer : MonoBehaviour
         {
             inRange = false;
             CancelInvoke();
+
         }
 
 
@@ -53,6 +54,11 @@ public class ShootAtPlayer : MonoBehaviour
 
     void Update()
     {
+        if (PlayerLoc == null)
+        {
+            CancelInvoke();
+
+        }
 
         PlayerLoc = GameObject.FindGameObjectWithTag("Player");
 
@@ -61,7 +67,8 @@ public class ShootAtPlayer : MonoBehaviour
 
         this.transform.LookAt(position);
 
-
+     
+     
     }
 
 
@@ -86,7 +93,7 @@ public class ShootAtPlayer : MonoBehaviour
 
         Temporary_RigidBody.AddForce(transform.forward * ForceAmount);
 
-        Destroy(Temporary_Buller_Handler, 10.0f);
+        Destroy(Temporary_Buller_Handler, 8.0f);
         //    CanShoot = true;
     }
 

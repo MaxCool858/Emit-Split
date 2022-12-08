@@ -86,11 +86,10 @@ public class Boss_Mechanics : MonoBehaviour
                 RingSpawn();
             }
 
-        Debug.Log("Blue on " + explodermove_possession.BlueTrue);
 
 
 
-        explodermove_possession = GameObject.Find("Player").GetComponent<ExploderMove_Possession>();
+        //explodermove_possession = GameObject.Find("Player").GetComponent<ExploderMove_Possession>();
 
 
         TriggerByObject = GameObject.Find("Exploder_Blue");
@@ -103,26 +102,22 @@ public class Boss_Mechanics : MonoBehaviour
 
 
 
-        if (other.tag == "Exploder_Blue" && BlueOn)
+        if (other.tag == "Exploder_Blue" )
         {
      
             Damage();
-           // Destroy(other.gameObject);
 
         }
 
-        else if (other.tag == "Player" && RedOn)
+        else if (other.tag == "Exploder_Red" )
         {
 
-            Debug.Log("NEED FIX");
-            //Damage();
+            Damage();
         }
-        else if (other.tag == "Player" && GreenOn)
+        else if (other.tag == "Exploder_Green" )
         {
 
-            Debug.Log("NEED FIX");
-
-            //  Damage();
+             Damage();
         }
 
 

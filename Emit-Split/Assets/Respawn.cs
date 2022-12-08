@@ -56,7 +56,18 @@ public class Respawn : MonoBehaviour
             Debug.Log("HEALTH" + script.Health);
 
         }
+        if (other.tag == "Exploder_Red")
+        {
+            script.Health -= 1;
+            Debug.Log("HEALTH" + script.Health);
 
+        }
+        if (other.tag == "Exploder_Green")
+        {
+            script.Health -= 1;
+            Debug.Log("HEALTH" + script.Health);
+
+        }
     }
 
 

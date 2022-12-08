@@ -102,45 +102,8 @@ public class Enemy3Movee : MonoBehaviour
 
     }
 
-    void FireSplitter() //detects a left click and will fire raycast. switch the player into the enemy if it detects one.
-    {
-        OriginPlayer.GetComponent<UIManagement>().LoseEnergy(0);
-        Ray ray = new Ray(shootpoint.position, transform.forward); //shoots ray out of shootpoint transform.
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
-        Debug.DrawRay(ray.origin, ray.direction * 10);
-        //Debug.Log(hit.point);
-        //Debug.Log(hit.collider);
-        if (hit.collider != null && hit.collider.gameObject.tag == "Hurty")
-        {
-            SwapTo(hit); //if you hit an enemy (tagged as Hurty) switch to that enemy
-        }
-    }
-
-    private void SwapTo(RaycastHit hit) //swaps you to the enemy you hit with splitter
-    {
-        hit.collider.gameObject.tag = "Player"; //sets enemy tag to player
-        player = hit.collider.gameObject; //sets player object to enemy
-        playercontrol.enabled = false; //disables the current control scheme
-        //playercontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;  //sets enemy character controller to the player controller.
-        playercontrol.enabled = true; //activates the enemy controller (now called playercontrol)
-        int EnemyType = hit.collider.GetComponent<EnemyClass>().EnemyTypeNum;
-
-        if (EnemyType == 2)
-        {
-            GameObject tempenemy = hit.collider.gameObject;
-            CharacterController tempenemycontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;
-            tempenemycontrol.enabled = true;
-            playercontrol.enabled = false;
-            CameraTarget.GetComponent<CameraFollow>().player = tempenemy;
-            this.GetComponent<Enemy2Movee>().enabled = true;
-            this.GetComponent<Enemy2Movee>().player = tempenemy;
-            this.GetComponent<Enemy2Movee>().playercontrol = tempenemycontrol;
-            this.GetComponent<Movee>().enabled = false;
-        }
 
 
-    }
 
     void onMoveInput() //if the player presses WASD detect which keys they are pressing and set that to the input.
     {
@@ -199,8 +162,8 @@ public class Enemy3Movee : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(moveVector.x, moveVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             //float targetRunAngle = Mathf.Atan2(runMoveVector.x, runMoveVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, smoothTurnTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, smoothTurnTime);
+            player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             //angleForMove = targetAngle;
             //CurrentMovement = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             //CurrentRunMovement = Quaternion.Euler(0f, targetRunAngle, 0f) * Vector3.forward;
@@ -270,11 +233,11 @@ public class Enemy3Movee : MonoBehaviour
         {
             OriginPlayer.GetComponent<UIManagement>().ActivateLever1();
         }
-        if (playerInput.CharacterMove.Jump.triggered && isGrounded)
+      /*  if (playerInput.CharacterMove.Jump.triggered && isGrounded)
         {
             velocity.y = Mathf.Sqrt(maxJumpHeight * -2f * gravity);
         }
-
+      */
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y <= 0)
@@ -285,7 +248,7 @@ public class Enemy3Movee : MonoBehaviour
         {
             velocity.y += gravity * Time.deltaTime;
         }
-
+      
         if (isRunPressed && OriginPlayer.GetComponent<UIManagement>().Energy >= 0.1)
         {
             isDrilling = true;
