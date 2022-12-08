@@ -9,7 +9,10 @@ public class Boss_Mechanics : MonoBehaviour
     private bool RedOn = true;
     private bool GreenOn = false;
 
-    
+
+    public GameObject TriggerByObject;
+
+
 
     //Spawn Enemies
     public GameObject exploder_red;
@@ -87,16 +90,47 @@ public class Boss_Mechanics : MonoBehaviour
 
 
 
-        explodermove_possession = GameObject.Find("Player").GetComponent<ExploderMove_Possession>();    
-    
- 
-           
+        explodermove_possession = GameObject.Find("Player").GetComponent<ExploderMove_Possession>();
+
+
+        TriggerByObject = GameObject.Find("Exploder_Blue");
             
             
         }
 
+    void OnTriggerEnter(Collider other)
+    {
 
-        void ChangeColor()
+
+
+        if (other.tag == "Exploder_Blue" && BlueOn)
+        {
+     
+            Damage();
+           // Destroy(other.gameObject);
+
+        }
+
+        else if (other.tag == "Player" && RedOn)
+        {
+
+            Debug.Log("NEED FIX");
+            //Damage();
+        }
+        else if (other.tag == "Player" && GreenOn)
+        {
+
+            Debug.Log("NEED FIX");
+
+            //  Damage();
+        }
+
+
+
+
+    }
+
+    void ChangeColor()
         {
 
             if (RedOn)
@@ -263,40 +297,6 @@ public class Boss_Mechanics : MonoBehaviour
         }
 
 
-
-
-
-        void OnTriggerEnter(Collider other)
-        {
-           
-            //delete below-
-
-            if (other.tag == "Player")
-            {
-            Debug.Log("Blue on ");
-              Damage();
-                   
-
-            }
-
-            else if (other.tag == "Player" && RedOn)
-            {
-
-            Debug.Log("NEED FIX");
-                //Damage();
-            }
-            else if (other.tag == "Player" && GreenOn)
-            {
-
-            Debug.Log("NEED FIX");
-
-          //  Damage();
-              }
-
-
-        
-
-    }
 
 
     void CheckColor()

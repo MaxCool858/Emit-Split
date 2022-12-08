@@ -137,7 +137,7 @@ public class Movee : MonoBehaviour
     private void SwapTo(RaycastHit hit) //swaps you to the enemy you hit with splitter
     {
         this.gameObject.tag = "Untagged";
-        hit.collider.gameObject.tag = "Player"; //sets enemy tag to player
+        //hit.collider.gameObject.tag = "Player"; //sets enemy tag to player
         player = hit.collider.gameObject; //sets player object to enemy
         playercontrol.enabled = false; //disables the current control scheme
         //playercontrol = hit.collider.gameObject.GetComponent<EnemyClass>().enemycontrol;  //sets enemy character controller to the player controller.

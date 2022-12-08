@@ -265,7 +265,12 @@ public class ExploderMove_Possession : MonoBehaviour
 
         playercontrol.Move(velocity);
 
-      
+        /*
+        if(this.gameObject = null)
+        {
+            OriginReturn();
+        }
+      */
     }
 
     void OriginReturn()
